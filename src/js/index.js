@@ -1,5 +1,5 @@
 import "../css/owfont-regular.css";
 import "../css/style.css";
+import { showTime } from "./time.js";
 
-const sayHello = () => console.log("Hello");
-sayHello();
+showTime();
