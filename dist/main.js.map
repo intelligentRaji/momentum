@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","mappings":"mBAGuBA,QAAQC,IAAI,Q","sources":["webpack://my-webpack-project/./src/index.js"],"sourcesContent":["import \"./css/owfont-regular.css\";\r\nimport \"./css/style.css\";\r\n\r\nconst sayHello = () => console.log(\"Hello\");\r\nsayHello();\r\n"],"names":["console","log"],"sourceRoot":""}

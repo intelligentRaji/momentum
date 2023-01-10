@@ -1,0 +1,846 @@
+/*!
+ *  owfont-regular 1.0.0 by Deniz Fuchidzhiev - http://websygen.com
+ *  License - font: SIL OFL 1.1, css: MIT License
+ */
+/* FONT PATH
+ * -------------------------- */
+@font-face {
+  font-family: 'owfont';
+  src: url(77585afbae07886acc4e.eot?v=1.0.0);
+  src: url(77585afbae07886acc4e.eot?#iefix&v=1.0.0) format('embedded-opentype'),
+	   url(data:font/woff;base64,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) format('woff'),
+	   url(3d46599b045b6a14f599.ttf) format('truetype'),
+	   url(4fabe299e94a1f0d52bb.svg#owf-regular) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.owf {
+  display: inline-block;
+  font: normal normal normal 14px/1 owfont;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
+/* makes the font 33% larger relative to the icon container */
+.owf-lg {
+  font-size: 1.33333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+.owf-2x {
+  font-size: 2em;
+}
+.owf-3x {
+  font-size: 3em;
+}
+.owf-4x {
+  font-size: 4em;
+}
+.owf-5x {
+  font-size: 5em;
+}
+.owf-fw {
+  width: 1.28571429em;
+  text-align: center;
+}
+.owf-ul {
+  padding-left: 0;
+  margin-left: 2.14285714em;
+  list-style-type: none;
+}
+.owf-ul > li {
+  position: relative;
+}
+.owf-li {
+  position: absolute;
+  left: -2.14285714em;
+  width: 2.14285714em;
+  top: 0.14285714em;
+  text-align: center;
+}
+.owf-li.owf-lg {
+  left: -1.85714286em;
+}
+.owf-border {
+  padding: .2em .25em .15em;
+  border: solid 0.08em #eeeeee;
+  border-radius: .1em;
+}
+.owf-pull-right {
+  float: right;
+}
+.owf-pull-left {
+  float: left;
+}
+.owf.owf-pull-left {
+  margin-right: .3em;
+}
+.owf.owf-pull-right {
+  margin-left: .3em;
+}
+
+/* owfont uses the Unicode Private Use Area (PUA) to ensure screen
+   readers do not read off random characters that represent icons */
+   
+/*   Weather Condition Codes    */
+   
+/*   Thunderstorm - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
+   
+/* thunderstorm with light rain */
+.owf-200:before,
+.owf-200-d:before,
+.owf-200-n:before {
+  content: "\EB28";
+}
+/* thunderstorm with rain */
+.owf-201:before,
+.owf-201-d:before,
+.owf-201-n:before {
+  content: "\EB29";
+}
+/* thunderstorm with heavy rain */
+.owf-202:before,
+.owf-202-d:before,
+.owf-202-n:before {
+  content: "\EB2A";
+}
+/*  light thunderstorm  */
+.owf-210:before,
+.owf-210-d:before,
+.owf-210-n:before {
+  content: "\EB32";
+}
+/*  thunderstorm  */
+.owf-211:before,
+.owf-211-d:before,
+.owf-211-n:before {
+  content: "\EB33";
+}
+/*   heavy thunderstorm   */
+.owf-212:before,
+.owf-212-d:before,
+.owf-212-n:before {
+  content: "\EB34";
+}
+/*   ragged thunderstorm   */
+.owf-221:before,
+.owf-221-d:before,
+.owf-221-n:before {
+  content: "\EB3D";
+}
+/*  thunderstorm with light drizzle    */
+.owf-230:before,
+.owf-230-d:before,
+.owf-230-n:before {
+  content: "\EB46";
+}
+/*  thunderstorm with drizzle     */
+.owf-231:before,
+.owf-231-d:before,
+.owf-231-n:before {
+  content: "\EB47";
+}
+/* thunderstorm with heavy drizzle     */
+.owf-232:before,
+.owf-232-d:before,
+.owf-232-n:before {
+  content: "\EB48";
+}
+
+/*   Drizzle - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
+
+/*  light intensity drizzle */
+.owf-300:before,
+.owf-300-d:before,
+.owf-300-n:before {
+  content: "\EB8C";
+}
+/*  drizzle */
+.owf-301:before,
+.owf-301-d:before,
+.owf-301-n:before {
+  content: "\EB8D";
+}
+/*  heavy intensity drizzle  */
+.owf-302:before,
+.owf-302-d:before,
+.owf-302-n:before {
+  content: "\EB8E";
+}
+/*   light intensity drizzle rain  */
+.owf-310:before,
+.owf-310-d:before,
+.owf-310-n:before {
+  content: "\EB96";
+}
+/*  drizzle rain  */
+.owf-311:before,
+.owf-311-d:before,
+.owf-311-n:before {
+  content: "\EB97";
+}
+/* heavy intensity drizzle rain */
+.owf-312:before,
+.owf-312-d:before,
+.owf-312-n:before {
+  content: "\EB98";
+}
+/* shower rain and drizzle  */
+.owf-313:before,
+.owf-313-d:before,
+.owf-313-n:before {
+  content: "\EB99";
+}
+/* heavy shower rain and drizzle*/
+.owf-314:before,
+.owf-314-d:before,
+.owf-314-n:before {
+  content: "\EB9A";
+}
+/* shower drizzle */
+.owf-321:before,
+.owf-321-d:before,
+.owf-321-n:before {
+  content: "\EBA1";
+}
+
+/*   Rain - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
+
+/* light rain  */
+.owf-500:before,
+.owf-500-d:before,
+.owf-500-n:before {
+  content: "\EC54";
+}
+/* moderate rain  */
+.owf-501:before,
+.owf-501-d:before,
+.owf-501-n:before {
+  content: "\EC55";
+}
+/* heavy intensity rain  */
+.owf-502:before,
+.owf-502-d:before,
+.owf-502-n:before {
+  content: "\EC56";
+}
+/* very heavy rain   */
+.owf-503:before,
+.owf-503-d:before,
+.owf-503-n:before {
+  content: "\EC57";
+}
+/* extreme rain    */
+.owf-504:before,
+.owf-504-d:before,
+.owf-504-n:before {
+  content: "\EC58";
+}
+/* freezing rain    */
+.owf-511:before,
+.owf-511-d:before,
+.owf-511-n:before {
+  content: "\EC5F";
+}
+/*  light intensity shower rain    */
+.owf-520:before,
+.owf-520-d:before,
+.owf-520-n:before {
+  content: "\EC68";
+}
+/* shower rain  */
+.owf-521:before,
+.owf-521-d:before,
+.owf-521-n:before {
+  content: "\EC69";
+}
+/*  heavy intensity shower rain  */
+.owf-522:before,
+.owf-522-d:before,
+.owf-522-n:before {
+  content: "\EC6A";
+}
+/* ragged shower rain  */
+.owf-531:before,
+.owf-531-d:before,
+.owf-531-n:before {
+  content: "\EC73";
+}
+
+/*   Snow - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
+
+/* light snow  */
+.owf-600:before,
+.owf-600-d:before,
+.owf-600-n:before {
+  content: "\ECB8";
+}
+/*  snow  */
+.owf-601:before,
+.owf-601-d:before,
+.owf-601-n:before {
+  content: "\ECB9";
+}
+/*   heavy snow   */
+.owf-602:before,
+.owf-602-d:before,
+.owf-602-n:before {
+  content: "\ECBA";
+}
+/*  sleet  */
+.owf-611:before,
+.owf-611-d:before,
+.owf-611-n:before {
+  content: "\ECC3";
+}
+/*   shower sleet */
+.owf-612:before,
+.owf-612-d:before,
+.owf-612-n:before {
+  content: "\ECC4";
+}
+/* light rain and snow */
+.owf-615:before,
+.owf-615-d:before,
+.owf-615-n:before {
+  content: "\ECC7";
+}
+/* rain and snow  */
+.owf-616:before,
+.owf-616-d:before,
+.owf-616-n:before {
+  content: "\ECC8";
+}
+/* light shower snow  */
+.owf-620:before,
+.owf-620-d:before,
+.owf-620-n:before {
+  content: "\ECCC";
+}
+/* shower snow  */
+.owf-621:before,
+.owf-621-d:before,
+.owf-621-n:before {
+  content: "\ECCD";
+}
+/* heavy shower snow  */
+.owf-622:before,
+.owf-622-d:before,
+.owf-622-n:before {
+  content: "\ECCE";
+}
+
+/*   Atmosphere - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
+
+/* mist */
+.owf-701:before,
+.owf-701-d:before,
+.owf-701-n:before {
+  content: "\ED1D";
+}
+/* smoke */
+.owf-711:before,
+.owf-711-d:before,
+.owf-711-n:before {
+  content: "\ED27";
+}
+/* haze */
+.owf-721:before,
+.owf-721-d:before,
+.owf-721-n:before {
+  content: "\ED31";
+}
+/* Sand/Dust Whirls */
+.owf-731:before,
+.owf-731-d:before,
+.owf-731-n:before {
+  content: "\ED3B";
+}
+/* Fog */
+.owf-741:before,
+.owf-741-d:before,
+.owf-741-n:before {
+  content: "\ED45";
+}
+/* sand */
+.owf-751:before,
+.owf-751-d:before,
+.owf-751-n:before {
+  content: "\ED4F";
+}
+/* dust */
+.owf-761:before,
+.owf-761-d:before,
+.owf-761-n:before {
+  content: "\ED59";
+}
+/*  VOLCANIC ASH  */
+.owf-762:before,
+.owf-762-d:before,
+.owf-762-n:before {
+  content: "\ED5A";
+}
+/* SQUALLS */
+.owf-771:before,
+.owf-771-d:before,
+.owf-771-n:before {
+  content: "\ED63";
+}
+/* TORNADO */
+.owf-781:before,
+.owf-781-d:before,
+.owf-781-n:before {
+  content: "\ED6D";
+}
+
+/*   Clouds - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
+
+/*  sky is clear  */  /*  Calm  */
+.owf-800:before,
+.owf-800-d:before,
+.owf-951:before,
+.owf-951-d:before {
+  content: "\ED80";
+}
+.owf-800-n:before,
+.owf-951-n:before {
+  content: "\F168";
+}
+/*  few clouds   */
+.owf-801:before,
+.owf-801-d:before {
+  content: "\ED81";
+}
+.owf-801-n:before {
+  content: "\F169";
+}
+/* scattered clouds */
+.owf-802:before,
+.owf-802-d:before {
+  content: "\ED82";
+}
+.owf-802-n:before {
+  content: "\F16A";
+}
+/* broken clouds  */
+.owf-803:before,
+.owf-803-d:before,
+.owf-803-n:before {
+  content: "\ED83";
+}
+/* overcast clouds  */
+.owf-804:before,
+.owf-804-d:before,
+.owf-804-n:before {
+  content: "\ED84";
+}
+
+/*   Extreme - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
+
+/* tornado  */
+.owf-900:before,
+.owf-900-d:before,
+.owf-900-n:before {
+  content: "\EDE4";
+}
+/*  tropical storm  */
+.owf-901:before,
+.owf-901-d:before,
+.owf-901-n:before {
+  content: "\EDE5";
+}
+/* hurricane */
+.owf-902:before,
+.owf-902-d:before,
+.owf-902-n:before {
+  content: "\EDE6";
+}
+/* cold */
+.owf-903:before,
+.owf-903-d:before,
+.owf-903-n:before {
+  content: "\EDE7";
+}
+/* hot */
+.owf-904:before,
+.owf-904-d:before,
+.owf-904-n:before {
+  content: "\EDE8";
+}
+/* windy */
+.owf-905:before,
+.owf-905-d:before,
+.owf-905-n:before {
+  content: "\EDE9";
+}
+/* hail */
+.owf-906:before,
+.owf-906-d:before,
+.owf-906-n:before {
+  content: "\EDEA";
+}
+
+/*   Additional - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
+
+/* Setting */
+.owf-950:before,
+.owf-950-d:before,
+.owf-950-n:before {
+  content: "\EE16";
+}
+/*  Light breeze  */
+.owf-952:before,
+.owf-952-d:before,
+.owf-952-n:before {
+  content: "\EE18";
+}
+/*  Gentle Breeze  */
+.owf-953:before,
+.owf-953-d:before,
+.owf-953-n:before {
+  content: "\EE19";
+}
+/*  Moderate breeze  */
+.owf-954:before,
+.owf-954-d:before,
+.owf-954-n:before {
+  content: "\EE1A";
+}
+/* Fresh Breeze  */
+.owf-955:before,
+.owf-955-d:before,
+.owf-955-n:before {
+  content: "\EE1B";
+}
+/* Strong  Breeze  */
+.owf-956:before,
+.owf-956-d:before,
+.owf-956-n:before {
+  content: "\EE1C";
+}
+/* High wind, near gale  */
+.owf-957:before,
+.owf-957-d:before,
+.owf-957-n:before {
+  content: "\EE1D";
+}
+/* Gale */
+.owf-958:before,
+.owf-958-d:before,
+.owf-958-n:before {
+  content: "\EE1E";
+}
+/*  Severe Gale  */
+.owf-959:before,
+.owf-959-d:before,
+.owf-959-n:before {
+  content: "\EE1F";
+}
+/* Storm */
+.owf-960:before,
+.owf-960-d:before,
+.owf-960-n:before {
+  content: "\EE20";
+}
+/*  Violent Storm  */
+.owf-961:before,
+.owf-961-d:before,
+.owf-961-n:before {
+  content: "\EE21";
+}
+/* Hurricane */
+.owf-962:before,
+.owf-962-d:before,
+.owf-962-n:before {
+  content: "\EE22";
+}
+@font-face {
+  font-family: 'Arial-MT';
+  src: url(bacabc50aec871480dcb.woff); /* Путь к файлу со шрифтом */
+ }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 480px;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  background: url(1ec547d73dd0ce35a063.jpg) center/cover, rgba(0, 0, 0, 0.5);
+  background-blend-mode: multiply;
+  transition: background-image 1s ease-in-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: 30vh;
+  min-height: 220px;  
+  padding: 20px;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 120px;
+  margin-bottom: 28px;
+}
+
+.play-list {
+  text-align: left;
+}
+
+.play-item {
+  position: relative;
+  padding: 5px;
+  padding-left: 20px;
+  list-style: none;
+  opacity: .8;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.play-item:hover {
+  opacity: 1;
+}
+
+.play-item::before {
+  content: "\2713";  
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-weight: 900;
+}
+
+.item-active::before {
+  color: #C5B358;
+}
+
+.player-icon,
+.slider-icon,
+.change-quote {
+  width: 32px;
+  height: 32px;
+  background-size: 32px 32px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  opacity: .8;
+  cursor: pointer;
+  transition: .3s;  
+}
+
+.player-icon:hover,
+.slider-icon:hover,
+.change-quote:hover {
+  opacity: 1;
+}
+
+.player-icon:active,
+.slider-icon:active,
+.change-quote:active {
+  border: 0;
+  outline: 0;  
+  transform: scale(1.1);
+}
+
+.play {
+  width: 40px;
+  height: 40px;
+  background-size: 40px 40px;
+  background-image: url(data:image/svg+xml;base64,PCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNjQgNjQiPgo8dGl0bGU+cGxheTI8L3RpdGxlPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzIgMGMtMTcuNjczIDAtMzIgMTQuMzI3LTMyIDMyczE0LjMyNyAzMiAzMiAzMiAzMi0xNC4zMjcgMzItMzItMTQuMzI3LTMyLTMyLTMyek0zMiA1OGMtMTQuMzU5IDAtMjYtMTEuNjQxLTI2LTI2czExLjY0MS0yNiAyNi0yNiAyNiAxMS42NDEgMjYgMjYtMTEuNjQxIDI2LTI2IDI2ek0yNCAxOGwyNCAxNC0yNCAxNHoiPjwvcGF0aD4KPC9zdmc+Cg==);
+}
+
+.pause {
+  background-image: url(data:image/svg+xml;base64,PCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNjQgNjQiPgo8dGl0bGU+cGF1c2U8L3RpdGxlPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzIgMGMtMTcuNjczIDAtMzIgMTQuMzI3LTMyIDMyczE0LjMyNyAzMiAzMiAzMiAzMi0xNC4zMjcgMzItMzItMTQuMzI3LTMyLTMyLTMyek0zMiA1OGMtMTQuMzU5IDAtMjYtMTEuNjQxLTI2LTI2czExLjY0MS0yNiAyNi0yNiAyNiAxMS42NDEgMjYgMjYtMTEuNjQxIDI2LTI2IDI2ek0yMCAyMGg4djI0aC04ek0zNiAyMGg4djI0aC04eiI+PC9wYXRoPgo8L3N2Zz4K);
+}
+
+.play-prev {
+  background-image: url(data:image/svg+xml;base64,PCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNjQgNjQiPgo8dGl0bGU+YmFja3dhcmQ8L3RpdGxlPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzIgNjRjMTcuNjczIDAgMzItMTQuMzI3IDMyLTMycy0xNC4zMjctMzItMzItMzItMzIgMTQuMzI3LTMyIDMyIDE0LjMyNyAzMiAzMiAzMnpNMzIgNmMxNC4zNTkgMCAyNiAxMS42NDEgMjYgMjZzLTExLjY0MSAyNi0yNiAyNi0yNi0xMS42NDEtMjYtMjYgMTEuNjQxLTI2IDI2LTI2ek00NCA0MmwtMTQtMTAgMTQtMTB6TTI4IDQybC0xNC0xMCAxNC0xMHoiPjwvcGF0aD4KPC9zdmc+Cg==);
+}
+
+.play-next {
+  background-image: url(data:image/svg+xml;base64,PCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNjQgNjQiPgo8dGl0bGU+Zm9yd2FyZDI8L3RpdGxlPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzIgMGMtMTcuNjczIDAtMzIgMTQuMzI3LTMyIDMyczE0LjMyNyAzMiAzMiAzMiAzMi0xNC4zMjcgMzItMzItMTQuMzI3LTMyLTMyLTMyek0zMiA1OGMtMTQuMzU5IDAtMjYtMTEuNjQxLTI2LTI2czExLjY0MS0yNiAyNi0yNiAyNiAxMS42NDEgMjYgMjYtMTEuNjQxIDI2LTI2IDI2ek0yMCAyMmwxNCAxMC0xNCAxMHpNMzYgMjJsMTQgMTAtMTQgMTB6Ij48L3BhdGg+Cjwvc3ZnPgo=);
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  row-gap: 5px;
+  width: 180px;
+  min-height: 180px;  
+  text-align: left;
+}
+
+.weather-error {
+  margin-top: -10px;
+}
+
+.description-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.weather-icon {
+  font-size: 44px;
+}
+
+.city {
+  width: 170px;
+  height: 34px;
+  padding: 5px;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;  
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #fff;
+  background-color: transparent;
+}
+
+.city::placeholder {  
+  font-size: 20px;
+  color: #fff;
+  opacity: .6;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40vh;
+  min-height: 260px;  
+  padding: 20px;
+}
+
+.slider-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  cursor: pointer;
+}
+
+.slide-prev {
+  left: 20px;
+  background-image: url(data:image/svg+xml;base64,PCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNjQgNjQiPgo8dGl0bGU+YXJyb3dfYmFja19pb3M8L3RpdGxlPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzEuMTI1IDEwLjM3NWwtMjEuNjI1IDIxLjYyNSAyMS42MjUgMjEuNjI1LTQuNzUgNC43NS0yNi4zNzUtMjYuMzc1IDI2LjM3NS0yNi4zNzV6Ij48L3BhdGg+Cjwvc3ZnPgo=);
+}
+
+.slide-next {
+  right: 20px;
+  background-image: url(data:image/svg+xml;base64,PCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNjQgNjQiPgo8dGl0bGU+YXJyb3dfZm9yd2FyZF9pb3M8L3RpdGxlPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTUuNjI1IDExbDUuNzUtNS42MjUgMjYuNjI1IDI2LjYyNS0yNi42MjUgMjYuNjI1LTUuNzUtNS42MjUgMjEuMTI1LTIxeiI+PC9wYXRoPgo8L3N2Zz4K);
+}
+
+.time {
+  min-height: 124px;
+  margin-bottom: 10px;
+  font-family: 'Arial-MT';
+  font-size: 100px;
+  letter-spacing: -4px;  
+}
+
+.date {
+  min-height: 28px;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.greeting-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  align-items: center;
+  min-height: 48px;
+  width: 100vw;
+  font-size: 40px;
+}
+
+.greeting {
+  flex: 1;  
+  padding: 10px;
+  text-align: right;
+}
+
+.name {
+  flex: 1;
+  max-width: 50%;
+  padding: 10px;
+  font-size: 40px;
+  text-align: left;
+  color: #fff;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.name::placeholder {
+  color: #fff;
+  opacity: .6;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+  min-height: 160px;  
+  padding: 20px;
+}
+
+.change-quote {
+  margin-bottom: 30px;
+  background-image: url(data:image/svg+xml;base64,PCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNjQgNjQiPgo8dGl0bGU+bG9vcDI8L3RpdGxlPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNNTUuNjA1IDEwLjM5NWMtNS44NTEtNi4zODgtMTQuMjYtMTAuMzk1LTIzLjYwNS0xMC4zOTUtMTcuNjczIDAtMzIgMTQuMzI3LTMyIDMyaDZjMC0xNC4zNTkgMTEuNjQxLTI2IDI2LTI2IDcuNjg5IDAgMTQuNTk2IDMuMzM5IDE5LjM1NiA4LjY0NGwtOS4zNTYgOS4zNTZoMjJ2LTIybC04LjM5NSA4LjM5NXoiPjwvcGF0aD4KPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTU4IDMyYzAgMTQuMzU5LTExLjY0MSAyNi0yNiAyNi03LjY4OSAwLTE0LjU5Ni0zLjMzOS0xOS4zNTYtOC42NDRsOS4zNTYtOS4zNTZoLTIydjIybDguMzk1LTguMzk1YzUuODUxIDYuMzg5IDE0LjI2IDEwLjM5NSAyMy42MDUgMTAuMzk1IDE3LjY3MyAwIDMyLTE0LjMyNyAzMi0zMmgtNnoiPjwvcGF0aD4KPC9zdmc+Cg==);  
+}
+
+.quote {
+  min-height: 32px;
+}
+
+.author {
+  min-height: 20px;
+}
+
+@media (max-width: 768px) {
+  .time {
+    min-height: 80px;
+    font-size: 72px;    
+  }
+
+  .greeting-container {
+    min-height: 40px;
+    font-size: 32px;
+  }
+
+  .greeting {
+    padding: 5px;
+  }
+
+  .name {
+    font-size: 32px;
+    padding: 5px;
+  }
+}
+
+/*# sourceMappingURL=main.css.map*/
