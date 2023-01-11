@@ -11,6 +11,5 @@ export function showTime() {
   }).format(format);
   showDate();
   showGreeting();
-
   setTimeout(showTime, 1000);
 }

@@ -2,7 +2,9 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { ESBuildMinifyPlugin } = require("esbuild-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -24,15 +26,38 @@ const config = {
     new HtmlWebpackPlugin({
       template: "index.html",
     }),
+    new ImageminWebpWebpackPlugin({
+      config: [
+        {
+          test: /\.(jpe?g|png)/,
+          options: {
+            quality: 75,
+          },
+        },
+      ],
+      overrideExtension: true,
+      detailedLogs: false,
+      silent: false,
+      strict: true,
+    }),
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
+  optimization: {
+    minimizer: [
+      new ESBuildMinifyPlugin({
+        target: "esnext",
+        css: true,
+      }),
+    ],
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/i,
-        loader: "babel-loader",
+        test: /\.js$/i,
+        loader: "esbuild-loader",
+        options: { target: "esnext" },
       },
       {
         test: /\.css$/i,
@@ -46,7 +71,6 @@ const config = {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
         type: "asset",
       },
-
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
