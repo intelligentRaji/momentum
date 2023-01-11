@@ -7,5 +7,5 @@ export default function showGreeting() {
     "Good afternoon",
     "Good evening",
   ];
-  greeting.textContent = greetPhrases[Math.floor(time.getHours() / 6)];
+  greeting.textContent = `${greetPhrases[Math.floor(time.getHours() / 6)]},`;
 }
