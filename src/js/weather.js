@@ -4,18 +4,13 @@ export default async function getWeather() {
   const wind = document.querySelector(".wind");
   const humidity = document.querySelector(".humidity");
   const weatherInput = document.querySelector(".city");
-  weatherInput.value = "Minsk";
-  weatherInput.value = localStorage.getItem("city");
-
-  async function donwloadWeather() {
-    let url =
-      "https://api.openweathermap.org/data/2.5/weather?q=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA&lang=en&appid=824cddaac888e6d118ebadaa2e0e5598&units=metric";
-    let res = await fetch(url);
-    let data = await res.json();
-    return data;
+  if (localStorage.getItem("city") !== null) {
+    weatherInput.value = localStorage.getItem("city");
+  } else {
+    weatherInput.value = "Minsk";
   }
 
-  let data = await donwloadWeather();
+  let data = await changeWeather();
 
   function compareWeather() {
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
@@ -28,16 +23,26 @@ export default async function getWeather() {
   }
 
   loadingWeather();
+  console.log(weatherInput.value);
 
   async function changeWeather() {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${weatherInput.value}&lang=en&appid=824cddaac888e6d118ebadaa2e0e5598&units=metric`;
-    let res = await fetch(url);
-    let data = await res.json();
-    return data;
+    try {
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${weatherInput.value}&lang=en&appid=824cddaac888e6d118ebadaa2e0e5598&units=metric`;
+      let res = await fetch(url);
+      let data = await res.json();
+      return data;
+    } catch (err) {
+      document.querySelector(".weather-error").textContent =
+        "ERROR: weather didn't load";
+      weatherCont.firstElementChild.textContent = "";
+      weatherCont.lastElementChild.textContent = "";
+      wind.textContent = "";
+      humidity.textContent = "";
+    }
   }
 
   function loadingWeather() {
-    donwloadWeather();
+    changeWeather();
     compareWeather();
   }
 
