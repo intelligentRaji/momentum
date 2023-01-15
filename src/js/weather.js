@@ -37,7 +37,6 @@ export default async function getWeather() {
   }
 
   loadingWeather();
-  console.log(weatherInput.value);
 
   async function changeWeather() {
     try {

@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ESBuildMinifyPlugin } = require("esbuild-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -40,7 +41,9 @@ const config = {
       silent: false,
       strict: true,
     }),
-
+    new CopyPlugin({
+      patterns: [{ from: "./src/json", to: "" }],
+    }),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
