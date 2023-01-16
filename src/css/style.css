@@ -46,7 +46,7 @@ body {
 .play-item {
   position: relative;
   padding: 5px;
-  padding-left: 20px;
+  padding-left: 25px;
   list-style: none;
   opacity: .8;
   cursor: pointer;
@@ -60,9 +60,16 @@ body {
 .play-item::before {
   content: "\2713";  
   position: absolute;
-  left: 0;
+  left: 5px;
   top: 2px;
   font-weight: 900;
+  
+}
+
+.play-item.active {
+   background-color: rgba(255, 255, 255, 0.2);
+   box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.2);
+   border-radius: 5px;
 }
 
 .item-active::before {

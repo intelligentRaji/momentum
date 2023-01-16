@@ -42,7 +42,10 @@ const config = {
       strict: true,
     }),
     new CopyPlugin({
-      patterns: [{ from: "./src/json", to: "" }],
+      patterns: [
+        { from: "./src/json", to: "" },
+        { from: "./src/assets/sounds", to: "sounds" },
+      ],
     }),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/

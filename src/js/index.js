@@ -5,9 +5,11 @@ import setLocalStorage from "./name.js";
 import getBg from "./bg.js";
 import getWeather from "./weather.js";
 import loadQuote from "./quotes.js";
+import player from "./player.js";
 
 showTime();
 setLocalStorage();
 getBg();
 getWeather();
 loadQuote();
+player();
