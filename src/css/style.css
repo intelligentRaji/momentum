@@ -3,6 +3,8 @@
   src: url("../assets/fonts/Arial-MT.woff"); /* Путь к файлу со шрифтом */
  }
 
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -31,12 +33,17 @@ body {
   padding: 20px;
 }
 
+.player {
+   display: flex;
+   flex-direction: column;
+}
+
 .player-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 120px;
-  margin-bottom: 28px;
+  margin-bottom: 18px;
 }
 
 .play-list {
@@ -138,6 +145,54 @@ body {
 
 .play-next {
   background-image: url("../assets/svg/play-next.svg");
+}
+
+.play-settings {
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 18px;
+   align-items: center;
+}
+
+.play-time {
+   font-family: 'Poppins';
+   font-size: 11px;
+   letter-spacing: 1.5px;
+}
+
+.play-bar {
+   appearance: none;
+   background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.4) 100%);
+   width: 120px;
+   height: 3px;
+   border-radius: 1.5px;
+   outline: none;
+   margin-left: 5px;
+   margin-right: 5px;
+}
+
+.play-bar:hover.play-bar::-webkit-slider-thumb {
+   opacity: 1;
+}
+
+.play-bar::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   opacity: 0;
+   background-color: #fff;
+   width: 14px;
+   height: 14px;
+   border-radius: 50%;
+   cursor: pointer;
+   transition: all 0.2s ease 0s;
+}
+
+.play-trackname {
+   margin-bottom: 10px;
+   text-align: left;  
+}
+
+.play-buttons {
+   display: flex;
 }
 
 .weather {
