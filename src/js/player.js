@@ -1,3 +1,8 @@
+import urlvolume from "../assets/svg/volume.svg";
+import urlOrder from "../assets/svg/order.svg";
+import urlRepeat from "../assets/svg/repeat.svg";
+import urlRandom from "../assets/svg/random.svg";
+
 export default async function player() {
   const audio = new Audio();
   const playList = await getPlaylist();
@@ -12,6 +17,13 @@ export default async function player() {
   const curtime = document.createElement("p");
   const trackname = document.createElement("p");
   const buttons = document.createElement("div");
+  const volumeContainer = document.createElement("div");
+  const volume = document.createElement("img");
+  const volumeBar = document.createElement("input");
+  const change = document.createElement("img");
+  const urls = [urlOrder, urlRepeat, urlRandom];
+  let tracksMemory = null;
+  let firstTime = true;
 
   settings.classList.add("play-settings");
   playUl.before(settings);
@@ -38,6 +50,27 @@ export default async function player() {
   buttons.classList.add("play-buttons");
   playUl.before(buttons);
 
+  volumeContainer.classList.add("play-volumecontainer");
+  buttons.append(volumeContainer);
+
+  volume.classList.add("play-volume");
+  volume.src = urlvolume;
+  volumeContainer.append(volume);
+
+  volumeBar.classList.add("volume-bar");
+  volumeBar.type = "range";
+  volumeBar.min = "0";
+  volumeBar.max = "100";
+  volumeBar.value = "0";
+  volumeBar.step = "1";
+  volumeContainer.append(volumeBar);
+
+  let changeNumber = 0;
+
+  change.classList.add("play-change");
+  change.src = urls[changeNumber];
+  buttons.append(change);
+
   for (let i = 0; i < playList.length; i++) {
     const li = document.createElement("li");
     li.classList.add("play-item");
@@ -47,6 +80,8 @@ export default async function player() {
   }
 
   let number = 0;
+  let memoryNumber = 0;
+  let previousNumber = 0;
 
   audio.volume = 0.05;
 
@@ -65,6 +100,17 @@ export default async function player() {
 
   createAudio();
 
+  function randomTrackReverse() {
+    number = Math.floor(Math.random() * playList.length);
+    number == memoryNumber ? randomTrackReverse() : (memoryNumber = number);
+  }
+
+  function randomTrack() {
+    tracksMemory.push(number);
+    number = Math.floor(Math.random() * playList.length);
+    number == memoryNumber ? randomTrack() : (memoryNumber = number);
+  }
+
   function numCheck() {
     playArr.forEach((e) => {
       if (playArr.indexOf(e) === number) {
@@ -79,6 +125,7 @@ export default async function player() {
     play.classList.add("pause");
     audio.play();
     trackname.textContent = `${playList[number].title}`;
+    firstTime = false;
   }
 
   function pauseAudio() {
@@ -87,14 +134,17 @@ export default async function player() {
   }
 
   function audioNext() {
-    number === playList.length - 1 ? (number = 0) : (number += 1);
+    if (change.src == urlOrder) {
+      number === playList.length - 1 ? (number = 0) : (number += 1);
+    } else if (change.src == urlRandom) {
+      randomTrack();
+    }
     createAudio();
     playAudio();
     numCheck();
   }
 
   function timeCalc() {
-    time.textContent = `${playList[number].duration}`;
     audio.addEventListener("timeupdate", () => {
       bar.value = (audio.currentTime * 100) / audio.duration;
       bar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${bar.value}%,rgba(255,255,255,0.4) ${bar.value}%,rgba(255,255,255,0.4) 100%)`;
@@ -108,22 +158,32 @@ export default async function player() {
     });
   }
 
+  timeCalc();
+
   bar.addEventListener("input", () => {
     audio.pause();
+    time.textContent = `${playList[number].duration}`;
     bar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${bar.value}%,rgba(255,255,255,0.4) ${bar.value}%,rgba(255,255,255,0.4) 100%)`;
     audio.currentTime = (audio.duration / 100) * bar.value;
     play.classList.remove("pause");
     bar.addEventListener("change", () => {
       playAudio();
-      timeCalc();
     });
   });
 
   play.addEventListener("click", () => {
     if (!play.classList.contains("pause")) {
+      if (change.src == urlRandom) {
+        if (firstTime == true) {
+          tracksMemory.push(number);
+          number = Math.floor(Math.random() * playList.length);
+          audio.src = playList[number].src;
+          audio.currentTime = 0;
+        }
+      }
+      time.textContent = `${playList[number].duration}`;
       playAudio();
       numCheck();
-      timeCalc();
     } else {
       pauseAudio();
     }
@@ -131,29 +191,64 @@ export default async function player() {
 
   audio.addEventListener("ended", () => {
     audioNext();
-    timeCalc();
+    time.textContent = `${playList[number].duration}`;
   });
 
   prev.addEventListener("click", () => {
-    number === 0 ? (number = playList.length - 1) : (number -= 1);
+    if (change.src == urlOrder) {
+      if (audio.currentTime > 3.5) {
+        number = number;
+      } else {
+        number === 0 ? (number = playList.length - 1) : (number -= 1);
+      }
+    } else if (change.src == urlRandom) {
+      if (audio.currentTime > 3.5) {
+        number = number;
+      } else {
+        if (tracksMemory.length == 0) {
+          randomTrackReverse();
+        } else {
+          number = tracksMemory.pop();
+        }
+      }
+    }
+    time.textContent = `${playList[number].duration}`;
     createAudio();
     playAudio();
     numCheck();
-    timeCalc();
   });
 
   next.addEventListener("click", () => {
     audioNext();
-    timeCalc();
+    time.textContent = `${playList[number].duration}`;
   });
 
   playArr.forEach((e) => {
     e.addEventListener("click", () => {
       number = playArr.indexOf(e);
+      time.textContent = `${playList[number].duration}`;
       createAudio();
       playAudio();
       numCheck();
-      timeCalc();
     });
+  });
+
+  change.addEventListener("click", () => {
+    if (changeNumber == 2) {
+      changeNumber = 0;
+    } else {
+      changeNumber += 1;
+    }
+    change.src = urls[changeNumber];
+    if (change.src == urlRepeat) {
+      audio.loop = true;
+    } else {
+      audio.loop = false;
+    }
+    if (change.src == urlRandom) {
+      tracksMemory = [];
+    } else {
+      tracksMemory = null;
+    }
   });
 }

@@ -150,7 +150,7 @@ body {
 .play-settings {
    display: flex;
    justify-content: space-between;
-   margin-bottom: 18px;
+   margin-bottom: 8px;
    align-items: center;
 }
 
@@ -187,12 +187,68 @@ body {
 }
 
 .play-trackname {
+   margin-left: 5px;
    margin-bottom: 10px;
    text-align: left;  
+   font-weight: 600;
 }
 
 .play-buttons {
    display: flex;
+   margin-bottom: 6.5px;
+   justify-content: space-between;
+}
+
+.play-volumecontainer {
+   display: flex;
+   align-items: center;
+   max-width: 25px;
+   transition: all 0.2s ease 0s;
+   overflow: hidden;
+   margin-left: 0.5px;
+}
+
+.play-volume {
+   width: 25px;
+   cursor: pointer;
+   transition: all 0.2s ease 0s;
+}
+
+.play-volumecontainer:hover {
+   max-width: 92px;
+}
+
+.volume-bar {
+   appearance: none;
+   background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.4) 100%);
+   max-width: 60px;
+   height: 3px;
+   border-radius: 1.5px;
+   outline: none;
+   margin-left: 2px;
+   margin-right: 5px;
+   transition: all 0.2s ease 0s;
+   
+}
+
+.play-volumecontainer:hover .volume-bar::-webkit-slider-thumb {
+   opacity: 1;
+}
+
+.volume-bar::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   opacity: 0;
+   background-color: #fff;
+   width: 14px;
+   height: 14px;
+   border-radius: 50%;
+   cursor: pointer;
+   transition: all 0.2s ease 0s;
+}
+
+.play-change {
+   width: 20px;
+   cursor: pointer;
 }
 
 .weather {
