@@ -42,6 +42,8 @@ body {
 .player-controls {
   display: flex;
   align-items: center;
+  align-self: center;
+  margin-right: 10px;
   justify-content: space-between;
   width: 120px;
   margin-bottom: 18px;
@@ -149,7 +151,9 @@ body {
 }
 
 .play-settings {
-   display: flex;
+   display: grid;
+   grid-template-columns: 35px 120px 35px;
+   gap: 5px;
    justify-content: space-between;
    margin-bottom: 8px;
    align-items: center;
@@ -161,15 +165,21 @@ body {
    letter-spacing: 1.5px;
 }
 
+.play-time:nth-child(1) {
+   justify-self: start;
+}
+
+.play-time:nth-child(2) {
+   justify-self: end;
+}
+
 .play-bar {
    appearance: none;
    background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.4) 100%);
-   width: 120px;
+   width: 100%;  
    height: 3px;
    border-radius: 1.5px;
    outline: none;
-   margin-left: 5px;
-   margin-right: 5px;
 }
 
 .play-bar:hover.play-bar::-webkit-slider-thumb {
@@ -188,8 +198,8 @@ body {
 }
 
 .play-trackname {
-   margin-left: 5px;
    margin-bottom: 10px;
+   align-self: center;
    text-align: left;  
    font-weight: 600;
 }
