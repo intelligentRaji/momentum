@@ -42,7 +42,7 @@ export default async function player() {
   settings.append(bar);
 
   time.classList.add("play-time");
-  time.textContent = "0:00";
+  time.textContent = "00:00";
   settings.append(time);
 
   trackname.classList.add("play-trackname");
