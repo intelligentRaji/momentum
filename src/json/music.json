@@ -1,22 +1,22 @@
 [
   {
-    "title": "Aqua Caelestis",
-    "src": "./sounds/Aqua Caelestis.mp3",
-    "duration": "00:39"
-  },
-  {
     "title": "River Flows In You",
     "src": "./sounds/River Flows In You.mp3",
     "duration": "01:37"
   },
   {
-    "title": "Ennio Morricone",
-    "src": "./sounds/Ennio Morricone.mp3",
-    "duration": "01:37"
+    "title": "Everything In Its Right Place",
+    "src": "./sounds/Everything In Its Right Place.mp3",
+    "duration": "04:11"
   },
   {
-    "title": "Summer Wind",
-    "src": "./sounds/Summer Wind.mp3",
-    "duration": "01:50"
+    "title": "Underground River",
+    "src": "./sounds/Underground River.mp3",
+    "duration": "03:15"
+  },
+  {
+    "title": "I Miss You",
+    "src": "./sounds/I miss you.mp3",
+    "duration": "01:56"
   }
 ]

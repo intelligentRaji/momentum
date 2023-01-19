@@ -173,7 +173,6 @@ export default async function player() {
         "0"
       );
       curtime.textContent = `${minutes}:${seconds}`;
-      console.log(audio.duration);
     });
   }
 
