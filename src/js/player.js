@@ -1,4 +1,5 @@
 import urlvolume from "../assets/svg/volume.svg";
+import urlvolumeoff from "../assets/svg/volume-off.svg";
 import urlOrder from "../assets/svg/order.svg";
 import urlRepeat from "../assets/svg/repeat.svg";
 import urlRandom from "../assets/svg/random.svg";
@@ -81,9 +82,25 @@ export default async function player() {
 
   let number = 0;
   let memoryNumber = 0;
-  let previousNumber = 0;
 
-  audio.volume = 0.05;
+  function setVolume() {
+    if (!localStorage.getItem("volume") === null) {
+      volumeBar.value = 5;
+      audio.volume = volumeBar.value / 100;
+    } else {
+      volumeBar.value = localStorage.getItem("volume");
+      audio.volume = volumeBar.value / 100;
+    }
+    volumeBar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${volumeBar.value}%,rgba(255,255,255,0.4) ${volumeBar.value}%,rgba(255,255,255,0.4) 100%)`;
+    if (volumeBar.value == 0) {
+      volume.src = urlvolumeoff;
+    } else {
+      volume.src = urlvolume;
+    }
+    console.log(volumeBar.value);
+  }
+
+  setVolume();
 
   trackname.textContent = playList[number].title;
 
@@ -249,6 +266,31 @@ export default async function player() {
       tracksMemory = [];
     } else {
       tracksMemory = null;
+    }
+  });
+
+  volumeBar.addEventListener("input", () => {
+    audio.volume = volumeBar.value / 100;
+    volumeBar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${volumeBar.value}%,rgba(255,255,255,0.4) ${volumeBar.value}%,rgba(255,255,255,0.4) 100%)`;
+    localStorage.setItem("volume", volumeBar.value);
+    if (volumeBar.value == 0) {
+      volume.src = urlvolumeoff;
+    } else {
+      volume.src = urlvolume;
+    }
+  });
+
+  volume.addEventListener("click", () => {
+    if (volumeBar.value != 0) {
+      volumeBar.value = 0;
+      audio.volume = volumeBar.value / 100;
+      volumeBar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${volumeBar.value}%,rgba(255,255,255,0.4) ${volumeBar.value}%,rgba(255,255,255,0.4) 100%)`;
+      volume.src = urlvolumeoff;
+    } else {
+      volumeBar.value = localStorage.getItem("volume");
+      audio.volume = volumeBar.value / 100;
+      volumeBar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${volumeBar.value}%,rgba(255,255,255,0.4) ${volumeBar.value}%,rgba(255,255,255,0.4) 100%)`;
+      volume.src = urlvolume;
     }
   });
 }
