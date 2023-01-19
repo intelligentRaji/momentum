@@ -97,7 +97,6 @@ export default async function player() {
     } else {
       volume.src = urlvolume;
     }
-    console.log(volumeBar.value);
   }
 
   setVolume();
@@ -171,7 +170,6 @@ export default async function player() {
         "0"
       );
       curtime.textContent = `${minutes}:${seconds}`;
-      console.log(audio.duration);
     });
   }
 
@@ -273,6 +271,9 @@ export default async function player() {
     audio.volume = volumeBar.value / 100;
     volumeBar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${volumeBar.value}%,rgba(255,255,255,0.4) ${volumeBar.value}%,rgba(255,255,255,0.4) 100%)`;
     localStorage.setItem("volume", volumeBar.value);
+  });
+
+  audio.addEventListener("volumechange", () => {
     if (volumeBar.value == 0) {
       volume.src = urlvolumeoff;
     } else {
@@ -285,12 +286,10 @@ export default async function player() {
       volumeBar.value = 0;
       audio.volume = volumeBar.value / 100;
       volumeBar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${volumeBar.value}%,rgba(255,255,255,0.4) ${volumeBar.value}%,rgba(255,255,255,0.4) 100%)`;
-      volume.src = urlvolumeoff;
     } else {
       volumeBar.value = localStorage.getItem("volume");
       audio.volume = volumeBar.value / 100;
       volumeBar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${volumeBar.value}%,rgba(255,255,255,0.4) ${volumeBar.value}%,rgba(255,255,255,0.4) 100%)`;
-      volume.src = urlvolume;
     }
   });
 }
