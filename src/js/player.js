@@ -162,6 +162,9 @@ export default async function player() {
 
   function timeCalc() {
     audio.addEventListener("timeupdate", () => {
+      if (isNaN(audio.duration)) {
+        return;
+      }
       bar.value = (audio.currentTime * 100) / audio.duration;
       bar.style.background = `-webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,1) ${bar.value}%,rgba(255,255,255,0.4) ${bar.value}%,rgba(255,255,255,0.4) 100%)`;
       let minutes = parseInt(audio.currentTime / 60);
@@ -170,6 +173,7 @@ export default async function player() {
         "0"
       );
       curtime.textContent = `${minutes}:${seconds}`;
+      console.log(audio.duration);
     });
   }
 

@@ -45,7 +45,6 @@ const config = {
       patterns: [
         { from: "./src/json", to: "" },
         { from: "./src/assets/sounds", to: "sounds" },
-        { from: "./src/assets/svg/sprite.svg", to: "sprite.svg" },
       ],
     }),
     // Add your plugins here
