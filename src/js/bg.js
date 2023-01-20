@@ -53,13 +53,10 @@ export default function getBg() {
     }
 
     function timeCheck() {
-      const hourMilliseconds = 3600000;
+      const cacheTime = 60 * 60 * 2000;
       let curTime = new Date();
       for (let item of arr) {
-        console.log(curTime);
-        console.log(new Date(item[0]));
-        console.log(curTime - new Date(item[0]));
-        if (+curTime - Date.parse(item[0]) > hourMilliseconds) {
+        if (+curTime - Date.parse(item[0]) > cacheTime) {
           arr.shift();
         } else {
           break;
@@ -74,7 +71,6 @@ export default function getBg() {
     function loadBg() {
       const fakeImg = new Image();
       fakeImg.src = arr[number][1];
-      console.log(fakeImg.src);
       fakeImg.onload = () => {
         body.style.backgroundImage = `url(${arr[number][1]})`;
       };
@@ -87,7 +83,11 @@ export default function getBg() {
         const data = await res.json();
         const img = data.urls.regular;
         const time = new Date();
-        body.style.backgroundImage = `url(${img})`;
+        const fakeImg = new Image();
+        fakeImg.src = img;
+        fakeImg.onload = () => {
+          body.style.backgroundImage = `url(${img})`;
+        };
         arr.push([time, img]);
       } else {
         if (number === arr.length - 1) {
@@ -98,6 +98,7 @@ export default function getBg() {
         loadBg();
       }
       timeCheck();
+      setLocalStorage();
     }
 
     async function prevUnsplashBg() {
@@ -107,8 +108,13 @@ export default function getBg() {
         const data = await res.json();
         const img = data.urls.regular;
         const time = new Date();
-        body.style.backgroundImage = `url(${img})`;
-        arr.shift([time, img]);
+        const fakeImg = new Image();
+        fakeImg.src = img;
+        console.log(fakeImg.src);
+        fakeImg.onload = () => {
+          body.style.backgroundImage = `url(${img})`;
+        };
+        arr.push([time, img]);
       } else {
         if (number === 0) {
           number = arr.length - 1;
@@ -118,6 +124,7 @@ export default function getBg() {
         loadBg();
       }
       timeCheck();
+      setLocalStorage();
     }
 
     window.addEventListener("beforeunload", setLocalStorage);
@@ -129,12 +136,135 @@ export default function getBg() {
         const data = await res.json();
         const img = data.urls.regular;
         const time = new Date();
-        body.style.backgroundImage = `url(${img})`;
+        const fakeImg = new Image();
+        fakeImg.src = img;
+        fakeImg.onload = () => {
+          body.style.backgroundImage = `url(${img})`;
+        };
         arr.push([time, img]);
+        console.log(arr.length);
       } else {
         loadBg();
       }
       timeCheck();
+      setLocalStorage();
+    }
+
+    next.addEventListener("click", nextUnsplashBg);
+    prev.addEventListener("click", prevUnsplashBg);
+
+    setFirstUnsplashBg();
+  }
+
+  //!flickr
+  async function getFlickrBg() {
+    let arr = [];
+    let number = Math.floor(Math.random() * arr.length);
+    if (localStorage.getItem("unsplashArr")) {
+      arr = JSON.parse(localStorage.unsplashArr);
+    }
+
+    function timeCheck() {
+      const cacheTime = 60 * 60 * 2000;
+      let curTime = new Date();
+      for (let item of arr) {
+        if (+curTime - Date.parse(item[0]) > cacheTime) {
+          arr.shift();
+        } else {
+          break;
+        }
+      }
+    }
+
+    function setLocalStorage() {
+      localStorage.unsplashArr = JSON.stringify(arr);
+    }
+
+    function loadBg() {
+      const fakeImg = new Image();
+      fakeImg.src = arr[number][1];
+      fakeImg.onload = () => {
+        body.style.backgroundImage = `url(${arr[number][1]})`;
+      };
+    }
+
+    async function nextUnsplashBg() {
+      if (arr.length < 20) {
+        const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${timefase[quarter]} nature&client_id=PwfEKpizTrZ0GTTpCtQdGqIG0r19M5rO8VP8zqt_YcQ`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const img = data.urls.regular;
+        const time = new Date();
+        const fakeImg = new Image();
+        fakeImg.src = img;
+        console.log(fakeImg.src);
+        fakeImg.onload = () => {
+          body.style.backgroundImage = `url(${img})`;
+        };
+        arr.push([time, img]);
+        console.log(arr.length);
+      } else {
+        if (number === arr.length - 1) {
+          number = 0;
+        } else {
+          number += 1;
+        }
+        loadBg();
+      }
+      timeCheck();
+      setLocalStorage();
+    }
+
+    async function prevUnsplashBg() {
+      if (arr.length < 20) {
+        const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${timefase[quarter]} nature&client_id=PwfEKpizTrZ0GTTpCtQdGqIG0r19M5rO8VP8zqt_YcQ`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const img = data.urls.regular;
+        const time = new Date();
+        const fakeImg = new Image();
+        fakeImg.src = img;
+        console.log(fakeImg.src);
+        fakeImg.onload = () => {
+          body.style.backgroundImage = `url(${img})`;
+        };
+        arr.push([time, img]);
+        console.log(arr.length);
+      } else {
+        if (number === 0) {
+          number = arr.length - 1;
+        } else {
+          number -= 1;
+        }
+        loadBg();
+      }
+      timeCheck();
+      setLocalStorage();
+    }
+
+    window.addEventListener("beforeunload", setLocalStorage);
+
+    async function setFirstUnsplashBg() {
+      if (arr.length < 20) {
+        const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=nature&extras=url_l&format=json&nojsoncallback=1`;
+        console.log(url);
+        const res = await fetch(url);
+        const data = await res.json();
+        console.log(data);
+        const img = data.urls.regular;
+        const time = new Date();
+        const fakeImg = new Image();
+        fakeImg.src = img;
+        fakeImg.onload = () => {
+          body.style.backgroundImage = `url(${img})`;
+        };
+        arr.push([time, img]);
+        console.log(arr.length);
+      } else {
+        loadBg();
+      }
+      timeCheck();
+      setLocalStorage();
     }
 
     next.addEventListener("click", nextUnsplashBg);
@@ -145,4 +275,5 @@ export default function getBg() {
 
   //getGitBg();
   getUnsplashBg();
+  //getFlickrBg();
 }
