@@ -188,6 +188,7 @@ export default function getBg() {
     }
 
     async function nextUnsplashBg() {
+      timeCheck();
       if (arr.length === 0) {
         getFlickrUrl();
       } else {
@@ -198,12 +199,12 @@ export default function getBg() {
         }
         loadBg();
       }
-      timeCheck();
       setLocalStorage();
     }
 
     async function prevUnsplashBg() {
       if (arr.length === 0) {
+        timeCheck();
         getFlickrUrl();
       } else {
         if (number === 0) {
@@ -213,7 +214,6 @@ export default function getBg() {
         }
         loadBg();
       }
-      timeCheck();
       setLocalStorage();
     }
 
@@ -235,7 +235,7 @@ export default function getBg() {
     setFirstUnsplashBg();
   }
 
-  getGitBg();
+  //getGitBg();
   //getUnsplashBg();
-  //getFlickrBg();
+  getFlickrBg();
 }
