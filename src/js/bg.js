@@ -53,7 +53,7 @@ export default function getBg() {
     }
 
     function timeCheck() {
-      const cacheTime = 60 * 60 * 2000;
+      const cacheTime = 2 * 60 * 60 * 1000;
       let curTime = new Date();
       for (let item of arr) {
         if (+curTime - Date.parse(item[0]) > cacheTime) {
@@ -77,7 +77,7 @@ export default function getBg() {
     }
 
     async function getUnsplashUrl() {
-      const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${timefase[quarter]} nature&client_id=PwfEKpizTrZ0GTTpCtQdGqIG0r19M5rO8VP8zqt_YcQ`;
+      const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${timefase[quarter]}-nature&client_id=PwfEKpizTrZ0GTTpCtQdGqIG0r19M5rO8VP8zqt_YcQ`;
       const res = await fetch(url);
       const data = await res.json();
       const img = data.urls.regular;
@@ -120,8 +120,6 @@ export default function getBg() {
       setLocalStorage();
     }
 
-    window.addEventListener("beforeunload", setLocalStorage);
-
     async function setFirstUnsplashBg() {
       if (arr.length < 20) {
         getUnsplashUrl();
@@ -140,34 +138,14 @@ export default function getBg() {
 
   //!flickr
   async function getFlickrBg() {
-    let arr = [];
-    let number = Math.floor(Math.random() * arr.length);
-    if (localStorage.getItem("RajiFlickrArr")) {
-      arr = JSON.parse(localStorage.RajiFlickrArr);
-    }
-
-    function timeCheck() {
-      const cacheTime = 60 * 60 * 1000;
-      let curTime = new Date();
-      for (let item of arr) {
-        if (+curTime - Date.parse(item[0]) > cacheTime) {
-          arr.shift();
-        } else {
-          break;
-        }
-      }
-    }
-
-    function setLocalStorage() {
-      localStorage.RajiFlickrArr = JSON.stringify(arr);
-    }
+    const data = await getFlickrUrl();
+    let number = Math.floor(Math.random() * data.photos.photo.length);
 
     function loadBg() {
       const fakeImg = new Image();
-      console.log(arr);
-      fakeImg.src = arr[0][1].photos.photo[number].url_l;
+      fakeImg.src = data.photos.photo[number].url_l;
       fakeImg.onload = () => {
-        body.style.backgroundImage = `url(${arr[0][1].photos.photo[number].url_l})`;
+        body.style.backgroundImage = `url(${data.photos.photo[number].url_l})`;
       };
     }
 
@@ -175,58 +153,29 @@ export default function getBg() {
       const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=${timefase[quarter]}nature&per_page=20&extras=url_l&format=json&nojsoncallback=1`;
       const res = await fetch(url);
       const data = await res.json();
-      const time = new Date();
-      console.log(data);
-      arr.push([time, data]);
-      const img = arr[1].photos.photo[number].url_l;
-      const fakeImg = new Image();
-      fakeImg.src = img;
-      fakeImg.onload = () => {
-        body.style.backgroundImage = `url(${img})`;
-      };
-      arr.push([time, img]);
+      return data;
     }
 
     async function nextUnsplashBg() {
-      timeCheck();
-      if (arr.length === 0) {
-        getFlickrUrl();
+      if (number === data.photos.photo.length - 1) {
+        number = 0;
       } else {
-        if (number === arr[0][1].photos.photo.length - 1) {
-          number = 0;
-        } else {
-          number += 1;
-        }
-        loadBg();
+        number += 1;
       }
-      setLocalStorage();
+      loadBg();
     }
 
     async function prevUnsplashBg() {
-      if (arr.length === 0) {
-        timeCheck();
-        getFlickrUrl();
+      if (number === 0) {
+        number = data.photos.photo.length - 1;
       } else {
-        if (number === 0) {
-          number = arr[0][1].photos.photo.length - 1;
-        } else {
-          number -= 1;
-        }
-        loadBg();
+        number -= 1;
       }
-      setLocalStorage();
+      loadBg();
     }
 
-    window.addEventListener("beforeunload", setLocalStorage);
-
     async function setFirstUnsplashBg() {
-      if (arr.length === 0) {
-        getFlickrUrl();
-      } else {
-        loadBg();
-      }
-      timeCheck();
-      setLocalStorage();
+      loadBg();
     }
 
     next.addEventListener("click", nextUnsplashBg);
@@ -236,6 +185,6 @@ export default function getBg() {
   }
 
   //getGitBg();
-  //getUnsplashBg();
-  getFlickrBg();
+  getUnsplashBg();
+  //getFlickrBg();
 }
