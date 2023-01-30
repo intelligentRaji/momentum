@@ -6,6 +6,7 @@ import getBg from "./bg.js";
 import getWeather from "./weather.js";
 import loadQuote from "./quotes.js";
 import player from "./player.js";
+import Todo from "./Todo/Todo.js";
 
 showTime();
 setLocalStorage();
@@ -13,3 +14,4 @@ getBg();
 getWeather();
 loadQuote();
 player();
+Todo();
