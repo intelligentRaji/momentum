@@ -4,7 +4,7 @@ import {
   tommorowDate,
   trimDate,
   yesterdayDate,
-} from "../utils.js";
+} from "../../utils.js";
 import Arrow from "./TodoArrow.js";
 import DateText from "./todoDateText.js";
 import { getListFromLocalSotrage } from "../localStorage.js";

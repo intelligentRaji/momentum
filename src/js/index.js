@@ -7,6 +7,7 @@ import getWeather from "./weather.js";
 import loadQuote from "./quotes.js";
 import player from "./player.js";
 import Todo from "./Todo/Todo.js";
+import Settings from "./Static/static.js";
 
 showTime();
 setLocalStorage();
@@ -15,3 +16,4 @@ getWeather();
 loadQuote();
 player();
 Todo();
+new Settings("div", "settings", document.body);

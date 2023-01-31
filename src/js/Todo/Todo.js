@@ -1,4 +1,4 @@
-import { baseComponent, createElem, trimDate, removeChilds } from "./utils.js";
+import { createElem, trimDate, removeChilds, yesterdayDate } from "../utils.js";
 import createButtonsWrapper from "./TodoButtons/buttons.js";
 import { createDeals } from "./TodoDeals/Deals.js";
 import { CreateInput } from "./input.js";
@@ -73,7 +73,11 @@ export default function Todo() {
   getListForFirstTime(curDate, input, deal);
 
   setInterval(() => {
-    getListOnDayChange(input, deal);
-    buttons.plansDate(new Date());
+    let currentDate = new Date();
+    let yestardayDate = yesterdayDate(new Date());
+    if (localStorage.getItem(trimDate(yestardayDate))) {
+      getListOnDayChange(input, deal, currentDate, yestardayDate);
+      plansDate.plusDate(new Date());
+    }
   }, 1000);
 }

@@ -1,4 +1,4 @@
-import { removeChilds, trimDate, yesterdayDate } from "./utils.js";
+import { removeChilds, trimDate, yesterdayDate } from "../utils.js";
 
 export function createLocalStorage(date, obj) {
   try {
@@ -56,16 +56,25 @@ export function getListFromLocalSotrage(
   }
 }
 
-export function getListOnDayChange(input, parent) {
-  let currentDate = new Date();
-  let yestardayDate = yesterdayDate(currentDate);
-  if (localStorage.getItem(trimDate(yestardayDate))) {
-    removeChilds(parent);
-    const yesterdayList = JSON.parse(localStorage.getItem(yestardayDate));
-    localStorage.removeItem(trimDate(yestardayDate));
-    const todayList = JSON.parse(localStorage.getItem(currentDate));
-    localStorage.removeItem(trimDate(currentDate));
-    todayList.forEach((element) => {
+export function getListOnDayChange(input, parent, currentDate, yestardayDate) {
+  removeChilds(parent);
+  const yesterdayList = JSON.parse(localStorage.getItem(yestardayDate));
+  localStorage.removeItem(trimDate(yestardayDate));
+  const todayList = JSON.parse(localStorage.getItem(currentDate));
+  localStorage.removeItem(trimDate(currentDate));
+  todayList.forEach((element) => {
+    input.InputCreateDeal(
+      "Today",
+      element.text,
+      parent,
+      element.status,
+      currentDate
+    );
+  });
+  for (let element of yesterdayList) {
+    if (element.status === "completed") {
+      continue;
+    } else {
       input.InputCreateDeal(
         "Today",
         element.text,
@@ -73,19 +82,6 @@ export function getListOnDayChange(input, parent) {
         element.status,
         currentDate
       );
-    });
-    for (let element of yesterdayList) {
-      if (element.status === "completed") {
-        continue;
-      } else {
-        input.InputCreateDeal(
-          "Today",
-          element.text,
-          parent,
-          element.status,
-          currentDate
-        );
-      }
     }
   }
 }

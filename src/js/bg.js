@@ -184,7 +184,7 @@ export default function getBg() {
     setFirstUnsplashBg();
   }
 
-  getGitBg();
-  //getUnsplashBg();
+  //getGitBg();
+  getUnsplashBg();
   //getFlickrBg();
 }

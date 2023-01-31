@@ -1,4 +1,4 @@
-import { createElem } from "../utils.js";
+import { createElem } from "../../utils.js";
 import arrowurl from "../../../assets/svg/arrow.svg";
 
 export default class Arrow {

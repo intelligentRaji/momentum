@@ -9,11 +9,18 @@ export function createElem(tag, clas, parentElem, text = "", src = undefined) {
 }
 
 export class baseComponent {
-  constructor(parent, tag = "div", classNames, textContent = "") {
+  constructor(
+    parent,
+    tag = "div",
+    className = undefined,
+    text = undefined,
+    src = undefined
+  ) {
     this.element = document.createElement(tag);
-    this.element.classList.add(classNames);
+    if (className != undefined) this.element.className = className;
     parent.append(this.element);
-    if (textContent != undefined) this.element.textContent = textContent;
+    if (text != undefined) this.element.textContent = textContent;
+    if (src != undefined) this.element.src = src;
   }
 }
 

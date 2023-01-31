@@ -1,4 +1,4 @@
-import { createElem } from "../utils.js";
+import { createElem } from "../../utils.js";
 
 export default function createButtonsWrapper(parent) {
   const buttonsWrapper = createElem("div", "todo-btns", parent);

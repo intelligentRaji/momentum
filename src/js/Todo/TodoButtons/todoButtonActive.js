@@ -1,4 +1,4 @@
-import { createElem } from "../utils.js";
+import { createElem } from "../../utils.js";
 
 export default class TodoButtonActive {
   constructor(parent) {

@@ -1,4 +1,4 @@
-import { createElem } from "./utils.js";
+import { createElem } from "../utils.js";
 import Deal from "./TodoDeals/Deal.js";
 
 export class CreateInput {

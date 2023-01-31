@@ -1,4 +1,4 @@
-import { createElem } from "../utils.js";
+import { createElem } from "../../utils.js";
 import createDeal from "./createDeal.js";
 
 export default function Deal(type, text, parent, status = "", date) {

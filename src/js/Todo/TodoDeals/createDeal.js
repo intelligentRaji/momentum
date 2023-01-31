@@ -2,7 +2,7 @@ import checkmark from "../../../assets/svg/checkmark.svg";
 import cross from "../../../assets/svg/cross.svg";
 import trashurl from "../../../assets/svg/trash.svg";
 import moveToToday from "../../../assets/svg/move-to-today.svg";
-import { createElem, trimDate } from "../utils.js";
+import { createElem, trimDate } from "../../utils.js";
 import {
   createLocalStorage,
   deleteLocalStorageItem,
