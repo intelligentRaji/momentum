@@ -11,7 +11,7 @@ export default function createDeal(
   status = "",
   date = new Date()
 ) {
-  console.log(date);
+  console.log(status);
   let curDate = trimDate(date);
   if (type === "Today") {
     obj.deal = createElem(

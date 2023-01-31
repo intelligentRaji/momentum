@@ -4,7 +4,11 @@ import { createDeals } from "./TodoDeals/Deals.js";
 import { CreateInput } from "./input.js";
 import Buttons from "./TodoButtons/button.js";
 import TodoButtonActive from "./TodoButtons/todoButtonActive.js";
-import { getListFromLocalSotrage } from "./localStorage.js";
+import {
+  getListForFirstTime,
+  getListFromLocalSotrage,
+  getListOnDayChange,
+} from "./localStorage.js";
 import PlansDate from "./TodoDate/todoDate.js";
 
 export default function Todo() {
@@ -60,5 +64,7 @@ export default function Todo() {
   );
 
   let curDate = trimDate(new Date());
-  getListFromLocalSotrage(curDate, input, deal);
+  getListForFirstTime(curDate, input, deal);
+
+  setInterval(getListOnDayChange(input, deal), 1000);
 }

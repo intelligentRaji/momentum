@@ -7,5 +7,5 @@ export default function Deal(type, text, parent, status = "", date) {
   this.parent = parent;
   this.status = status;
 
-  createDeal(this, type, text, (status = ""), date);
+  createDeal(this, type, text, status, date);
 }

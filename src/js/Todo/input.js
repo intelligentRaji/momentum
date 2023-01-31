@@ -10,7 +10,7 @@ export class CreateInput {
   }
 
   InputCreateDeal(type, text, parent, status = "", date) {
-    new Deal(type, text, parent, (status = ""), date);
+    new Deal(type, text, parent, status, date);
     this.element.value = "";
   }
 }
