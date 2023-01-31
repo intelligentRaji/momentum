@@ -6,6 +6,9 @@ export class CreateInput {
     const input = createElem(tag, className, parent);
     input.type = "text";
     input.placeholder = "New Todo";
+    input.addEventListener("input", () => {
+      input.value = input.value.substr(0, 33);
+    });
     this.element = input;
   }
 

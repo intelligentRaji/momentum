@@ -348,10 +348,26 @@ body {
    display: flex;
    flex-direction: column;
    gap: 2px;
+   overflow-y: scroll;
 }
+
+  .spisok::-webkit-scrollbar {
+   width: 10px;
+}
+
+.spisok::-webkit-scrollbar-track {
+   background-color: transparent;
+}
+
+.spisok::-webkit-scrollbar-thumb {
+   background-color: rgba(59, 59, 59, 0.5);
+   border-radius: 5px;
+}  
 
 .todo-deals {
    margin-top: 5px;
+   margin-bottom: 15px;
+   height: 160px;
 }
 
 .todo-item {
@@ -367,6 +383,11 @@ body {
 }
 
 .todo-item:hover > .todo-complete {
+   opacity: 0.5;
+   visibility: visible;
+}
+
+.todo-item:hover > .todo-move {
    opacity: 0.5;
    visibility: visible;
 }
@@ -391,6 +412,24 @@ body {
 
 .todo-complete-img {
    width: 100%;
+}
+
+.todo-move {
+   flex: 0 0 auto;
+   width: 25px;
+   opacity: 0;
+   visibility: hidden;
+   transition: all 0.2s ease 0s;
+   cursor: pointer;
+}
+
+.todo-move:hover {
+   transform: scale(1.1);
+   opacity: 1;
+}
+
+.todo-move-img {
+   width: 80%;
 }
 
 .todo-item-text {
@@ -429,6 +468,11 @@ body {
    padding-left: 10px;
    padding-bottom: 10px;
    font-size: 16px;
+}
+
+.todo-plans {
+   height: 130px;
+   margin-bottom: 15px;
 }
 
 .todo-plans-structure {
@@ -482,8 +526,10 @@ body {
    transform: scale(1.1);
 }
 
-.inbox {
+.todo-inbox {
+   height: 160px;
    margin-top: 5px;
+   margin-bottom: 15px;
    display: none;
 }
 

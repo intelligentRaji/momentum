@@ -34,6 +34,8 @@ export default function Todo() {
           undefined,
           plansDate.futureDate
         );
+      } else if (buttons.active === "Inbox") {
+        input.InputCreateDeal(buttons.active, input.element.value, Inbox);
       }
     }
   });
@@ -54,6 +56,10 @@ export default function Todo() {
       plansDate.futureDate
     );
   });
+  buttons.buttons.Inbox.addEventListener("click", () => {
+    removeChilds(Inbox);
+    getListFromLocalSotrage("Inbox", input, Inbox);
+  });
   const plansList = createElem("div", "todo-plans spisok", plansStructure);
   const plansDate = new PlansDate(
     "div",
@@ -66,5 +72,8 @@ export default function Todo() {
   let curDate = trimDate(new Date());
   getListForFirstTime(curDate, input, deal);
 
-  setInterval(getListOnDayChange(input, deal), 1000);
+  setInterval(() => {
+    getListOnDayChange(input, deal);
+    buttons.plansDate(new Date());
+  }, 1000);
 }

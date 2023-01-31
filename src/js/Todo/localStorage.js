@@ -24,6 +24,17 @@ export function deleteLocalStorageItem(date, text) {
   localStorage.setItem(date, JSON.stringify(obj));
 }
 
+export function getLocalStorageItem(name, text) {
+  const obj = JSON.parse(localStorage.getItem(name));
+  let item;
+  obj.forEach((element) => {
+    if (element.text === text) {
+      item = element;
+    }
+  });
+  return item;
+}
+
 export function getListFromLocalSotrage(
   date,
   input,

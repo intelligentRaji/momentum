@@ -1,8 +1,13 @@
 import checkmark from "../../../assets/svg/checkmark.svg";
 import cross from "../../../assets/svg/cross.svg";
 import trashurl from "../../../assets/svg/trash.svg";
+import moveToToday from "../../../assets/svg/move-to-today.svg";
 import { createElem, trimDate } from "../utils.js";
-import { createLocalStorage, deleteLocalStorageItem } from "../localStorage.js";
+import {
+  createLocalStorage,
+  deleteLocalStorageItem,
+  getLocalStorageItem,
+} from "../localStorage.js";
 
 export default function createDeal(
   obj,
@@ -11,7 +16,6 @@ export default function createDeal(
   status = "",
   date = new Date()
 ) {
-  console.log(status);
   let curDate = trimDate(date);
   if (type === "Today") {
     obj.deal = createElem(
@@ -24,6 +28,12 @@ export default function createDeal(
       "li",
       "todo-item",
       document.querySelector(".todo-plans")
+    );
+  } else if (type === "Inbox") {
+    obj.deal = createElem(
+      "li",
+      "todo-item",
+      document.querySelector(".todo-inbox")
     );
   }
 
@@ -47,11 +57,32 @@ export default function createDeal(
     });
   }
 
+  if (type === "Inbox") {
+    obj.move = createElem("div", "todo-move", obj.deal);
+    obj.moveImg = createElem(
+      "img",
+      "todo-move-img",
+      obj.move,
+      undefined,
+      moveToToday
+    );
+    obj.move.addEventListener("click", () => {
+      obj.deal.remove();
+      const item = getLocalStorageItem("Inbox", text);
+      deleteLocalStorageItem("Inbox", text);
+      createDeal(obj, "Today", item.text, "");
+    });
+  }
+
   const textDeal = createElem("p", "todo-item-text", obj.deal, text);
   obj.trash = createElem("div", "todo-trash", obj.deal);
   obj.trash.addEventListener("click", () => {
     obj.deal.remove();
-    deleteLocalStorageItem(curDate, text);
+    if (type === "Inbox") {
+      deleteLocalStorageItem("Inbox", text);
+    } else {
+      deleteLocalStorageItem(curDate, text);
+    }
   });
 
   obj.status = status;
@@ -80,5 +111,9 @@ export default function createDeal(
     status: status,
   };
 
-  createLocalStorage(curDate, item);
+  if (type === "Inbox") {
+    createLocalStorage("Inbox", item);
+  } else {
+    createLocalStorage(curDate, item);
+  }
 }
