@@ -717,7 +717,8 @@ body {
 .settings-wrapper {
    display: flex;
    flex: 1 0 auto;
-   padding: 15px 0px;
+   padding: 0px 0px;
+   overflow: hidden;
 }
 
 .settings-navigation {
@@ -725,6 +726,14 @@ body {
    flex-direction: column;
    justify-content: end;
    gap: 15px;
+   overflow: hidden;
+   transition: all 0.2s ease 0s;
+   border-right: 1px solid transparent;
+}
+
+.settings-navigation.active {
+   background-color: rgba(255, 255, 255, 0.034);
+   box-shadow: 0px 0px 7px rgb(133, 133, 133);
 }
 
 .settings-navigation-button {
@@ -738,8 +747,21 @@ body {
    cursor: pointer;
 }
 
+.settings-navigation-button.active {
+   opacity: 0.8;
+}
+
+.settings-navigation-button:last-child {
+   margin-bottom: 15px;
+}
+
+.settings-navigation-button:hover .settings-navigation-image {
+   transform: scale(1.2);
+}
+
 .settings-navigation-image {
-   width: 30px
+   width: 30px;
+   transition: all 0.2s ease 0s;
 }
 
 .settings-navigation-text {
