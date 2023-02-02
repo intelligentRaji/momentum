@@ -6,13 +6,15 @@ export default function setSettingsList() {
     blocks: {
       time: "on",
       date: "on",
-      greeting: "on",
-      quote: "on",
+      "greeting-container": "on",
+      quotes: "on",
       weather: "on",
-      audio: "on",
-      todolist: "on",
+      player: "on",
+      todo: "on",
     },
   };
 
-  localStorage.setItem("RajiSettings", JSON.stringify(settings));
+  if (!localStorage.getItem("RajiSettings")) {
+    localStorage.setItem("RajiSettings", JSON.stringify(settings));
+  }
 }

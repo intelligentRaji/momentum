@@ -52,3 +52,16 @@ export function removeChilds(parent) {
     parent.removeChild(parent.firstChild);
   }
 }
+
+export function ToUpperCase(text) {
+  return text[0].toUpperCase() + text.slice(1);
+}
+
+export function hideSetction(section) {
+  const settings = JSON.parse(localStorage.getItem("RajiSettings"));
+  const property = section.className.split(" ")[0];
+  if (settings.blocks[property] === "off") {
+    section.style.transition = "all 0s ease 0s";
+    section.classList.add("invisible");
+  }
+}

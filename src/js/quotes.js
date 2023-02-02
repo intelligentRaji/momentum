@@ -1,7 +1,11 @@
+import { hideSetction } from "./utils.js";
+
 export default async function loadQuote() {
   const quote = document.querySelector(".quote");
   const author = document.querySelector(".author");
   const changeQuote = document.querySelector(".change-quote");
+  const quotes = document.querySelector(".quotes");
+  hideSetction(quotes);
 
   async function downloadQuotes() {
     const quotes = "quotes.json";

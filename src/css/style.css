@@ -39,6 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 195px;
+  transition: all 0.3s ease 0s;
 }
 
 .player-controls {
@@ -86,6 +87,10 @@ body {
 
 .item-active::before {
   color: #c5b358;
+}
+
+.quotes {
+   transition: all 0.3s ease 0s;
 }
 
 .player-icon,
@@ -542,6 +547,7 @@ body {
   width: 180px;
   min-height: 180px;
   text-align: left;
+  transition: all 0.3s ease 0s;
 }
 
 .weather-error {
@@ -615,13 +621,16 @@ body {
   font-size: 100px;
   letter-spacing: -4px;
   user-select: none;
+  transition: all 0.3s ease 0s;
 }
 
 .date {
+  position: relative;
   min-height: 28px;
   font-size: 24px;
   margin-bottom: 20px;
   user-select: none;
+  transition: all 0.3s ease 0s;
 }
 
 .greeting-container {
@@ -632,6 +641,7 @@ body {
   min-height: 48px;
   width: 100vw;
   font-size: 40px;
+  transition: all 0.3s ease 0s;
 }
 
 .greeting {
@@ -777,34 +787,87 @@ body {
 }
 
 .settings-list {
-   margin: 15px 0;
    flex: 1 1 auto;
    display: flex;
    flex-direction: column;
-   border-right: 1px solid rgba(68, 68, 68, 0.445);
-   gap: 30px;
+   overflow-y: scroll;
 }
 
-.settings-button-container {
-   width: 100%;
-   margin: 0 20px;
-   display: flex;
-   border-bottom: 1px solid rgba(68, 68, 68, 0.445);
+.settings-list::-webkit-scrollbar {
+   width: 10px;
 }
+
+.settings-list::-webkit-scrollbar-track {
+   background-color: transparent;
+}
+
+.settings-list::-webkit-scrollbar-thumb {
+   background-color: rgba(59, 59, 59, 0.5);
+   border-radius: 5px;
+}  
 
 .settings-item {
+   height: 50px;
    list-style-type: none;
    display: flex;
-   justify-self: end;
-}
+   align-items: center;
+   justify-content: space-between;
+   margin: 0 20px;
+   padding: 0 2px;
+   border-bottom: 1px solid rgba(68, 68, 68, 0.445);
+} 
 
-.settings-button-text {
+.settings-item-text {
    opacity: 0.8;
    font-size: 16px;
    color: white;
    text-align: left;
    letter-spacing: 1px;
    font-weight: 400;
+}
+
+.settings-item-switch {
+   position: relative;
+   width: 40px;
+   height: 20px;
+   border: 1px solid rgba(255, 255, 255, 0.7);
+   overflow: hidden;
+   background-color: transparent;
+   border-radius: 10px;
+   transition: all 0.3s ease 0s;
+   cursor: pointer;
+}
+
+.settings-item-switch::before {
+   content: '';
+   position: absolute;
+   left: -1px;
+   top: -1px;
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background-color: #fff;
+   transition: all 0.3s ease 0s;
+}
+
+.settings-item-switch-bg {
+   width: 0;
+   height: 100%;
+   background-color: rgba(255, 255, 255, 0.5);
+   transition: all 0.3s ease 0s;
+}
+
+.settings-item-switch.on .settings-item-switch-bg {
+   width: 100%;
+}
+
+.settings-item-switch.on::before {
+   left: 100%;
+   transform: translateX(-100%);
+}
+
+.invisible {
+   opacity: 0;
 }
 
 @media (max-width: 768px) {

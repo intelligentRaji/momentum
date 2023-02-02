@@ -1,4 +1,10 @@
-import { createElem, trimDate, removeChilds, yesterdayDate } from "../utils.js";
+import {
+  createElem,
+  trimDate,
+  removeChilds,
+  yesterdayDate,
+  hideSetction,
+} from "../utils.js";
 import createButtonsWrapper from "./TodoButtons/buttons.js";
 import { createDeals } from "./TodoDeals/Deals.js";
 import { CreateInput } from "./input.js";
@@ -13,6 +19,7 @@ import PlansDate from "./TodoDate/todoDate.js";
 
 export default function Todo() {
   const todo = createElem("div", "todo unactive", document.body);
+  hideSetction(todo);
   const buttonsWrapper = createButtonsWrapper(todo);
   const todoActiveButton = new TodoButtonActive(buttonsWrapper);
   todoActiveButton.element.addEventListener("click", () => {

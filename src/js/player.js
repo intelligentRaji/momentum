@@ -3,8 +3,10 @@ import urlvolumeoff from "../assets/svg/volume-off.svg";
 import urlOrder from "../assets/svg/order.svg";
 import urlRepeat from "../assets/svg/repeat.svg";
 import urlRandom from "../assets/svg/random.svg";
+import { hideSetction } from "./utils.js";
 
 export default async function player() {
+  const player = document.querySelector(".player");
   const audio = new Audio();
   const playList = await getPlaylist();
   const play = document.querySelector(".play");
@@ -25,6 +27,7 @@ export default async function player() {
   const urls = [urlOrder, urlRepeat, urlRandom];
   let tracksMemory = null;
   let firstTime = true;
+  hideSetction(player);
 
   settings.classList.add("play-settings");
   playUl.before(settings);

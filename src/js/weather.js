@@ -1,10 +1,14 @@
+import { hideSetction } from "./utils.js";
+
 export default async function getWeather() {
+  const weather = document.querySelector(".weather");
   const weatherIcon = document.querySelector(".weather-icon");
   const weatherCont = document.querySelector(".description-container");
   const wind = document.querySelector(".wind");
   const humidity = document.querySelector(".humidity");
   const weatherInput = document.querySelector(".city");
   const weatherError = document.querySelector(".weather-error");
+  hideSetction(weather);
   if (localStorage.getItem("city") !== null) {
     weatherInput.value = localStorage.getItem("city");
   } else {

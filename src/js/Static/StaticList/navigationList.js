@@ -15,7 +15,7 @@ export default class SettingsList extends baseComponent {
     const blocks = settings.blocks;
     for (let key in blocks) {
       blocks[key] = new SelectFactory(this.element, "li", "settings-item", {
-        type: "block",
+        type: "blocks",
         text: key,
         mode: blocks[key],
         sections: "off",
