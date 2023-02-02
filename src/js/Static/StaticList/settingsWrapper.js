@@ -1,5 +1,6 @@
-import { createElem } from "../utils.js";
-import Navigation from "./StaticNavigation/settingsNavigation.js";
+import { createElem } from "../../utils.js";
+import Navigation from "../StaticNavigation/settingsNavigation.js";
+import SettingsList from "./navigationList.js";
 
 export default class Wrapper {
   constructor(tag, className, parent) {
@@ -9,5 +10,6 @@ export default class Wrapper {
       "div",
       "settings-navigation"
     );
+    this.list = new SettingsList(this.element, "ul", "settings-list");
   }
 }

@@ -76,8 +76,13 @@ export default function Todo() {
     let currentDate = new Date();
     let yestardayDate = yesterdayDate(new Date());
     if (localStorage.getItem(trimDate(yestardayDate))) {
-      getListOnDayChange(input, deal, currentDate, yestardayDate);
+      getListOnDayChange(
+        input,
+        deal,
+        trimDate(currentDate),
+        trimDate(currentDate)
+      );
       plansDate.plusDate(new Date());
     }
-  }, 1000);
+  }, 2000);
 }

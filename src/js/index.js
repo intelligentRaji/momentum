@@ -8,7 +8,9 @@ import loadQuote from "./quotes.js";
 import player from "./player.js";
 import Todo from "./Todo/Todo.js";
 import Settings from "./Static/static.js";
+import setSettingsList from "./settingsList.js";
 
+setSettingsList();
 showTime();
 setLocalStorage();
 getBg();

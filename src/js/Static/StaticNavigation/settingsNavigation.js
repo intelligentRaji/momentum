@@ -8,16 +8,22 @@ export default class Navigation extends baseComponent {
   constructor(parent, tag, className) {
     super(parent, tag, className);
     this.urls = [showurl, languageurl, wallpaperurl];
-    this.buttons = ["Display", "Language", "Wallpaper"].reduce((acc, sum) => {
+    this.buttonsNames = ["Display", "Language", "Wallpaper"];
+    this.buttons = this.buttonsNames.reduce((acc, sum) => {
       acc[sum] = new NavigationButton(
-        this.element,
+        this,
         "button",
         "settings-navigation-button",
-        this.urls[["Display", "Language", "Wallpaper"].indexOf(sum)],
+        this.urls[this.buttonsNames.indexOf(sum)],
         sum
       );
       return acc;
     }, {});
+    this.buttons.Display.element.classList.add("active");
+    this.activeButton = {
+      name: this.buttonsNames[0],
+      element: this.buttons.Display.element,
+    };
     this.width = this.buttons.Display.element.clientWidth;
     this.element.style.width = this.buttons.Display.img.clientWidth + 15 + "px";
     this.element.addEventListener("mouseenter", () => {
@@ -28,11 +34,6 @@ export default class Navigation extends baseComponent {
     this.element.addEventListener("mouseleave", () => {
       this.navigationSmallStyle();
     });
-    for (let item in this.buttons) {
-      this.buttons[item].element.addEventListener("click", () => {
-        this.navigationSmallStyle();
-      });
-    }
   }
 
   navigationFullStyle() {

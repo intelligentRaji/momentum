@@ -1,6 +1,6 @@
 import { createElem } from "../utils.js";
 import activeButton from "./activeButton.js";
-import Wrapper from "./settingsWrapper.js";
+import Wrapper from "./StaticList/settingsWrapper.js";
 
 export default class Settings {
   constructor(tag, className, parent) {

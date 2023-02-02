@@ -59,9 +59,9 @@ export function getListFromLocalSotrage(
 export function getListOnDayChange(input, parent, currentDate, yestardayDate) {
   removeChilds(parent);
   const yesterdayList = JSON.parse(localStorage.getItem(yestardayDate));
-  localStorage.removeItem(trimDate(yestardayDate));
+  localStorage.removeItem(yestardayDate);
   const todayList = JSON.parse(localStorage.getItem(currentDate));
-  localStorage.removeItem(trimDate(currentDate));
+  localStorage.removeItem(currentDate);
   todayList.forEach((element) => {
     input.InputCreateDeal(
       "Today",
