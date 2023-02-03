@@ -1,4 +1,4 @@
-import { baseComponent, createElem } from "../../utils.js";
+import { BaseComponent, createElem } from "../../utils.js";
 
 export default class Buttons {
   constructor(tag, className, parent) {

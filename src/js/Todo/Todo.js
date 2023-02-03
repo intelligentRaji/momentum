@@ -87,7 +87,7 @@ export default function Todo() {
         input,
         deal,
         trimDate(currentDate),
-        trimDate(currentDate)
+        trimDate(yestardayDate)
       );
       plansDate.plusDate(new Date());
     }

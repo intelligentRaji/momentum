@@ -8,8 +8,9 @@ export default class Wrapper {
     this.navigation = new Navigation(
       this.element,
       "div",
-      "settings-navigation"
+      "settings-navigation",
+      this
     );
-    this.list = new SettingsList(this.element, "ul", "settings-list");
+    this.list = new SettingsList(this.element, "ul", "settings-list", this);
   }
 }

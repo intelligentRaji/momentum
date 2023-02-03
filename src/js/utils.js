@@ -8,7 +8,7 @@ export function createElem(tag, clas, parentElem, text = "", src = undefined) {
   return element;
 }
 
-export class baseComponent {
+export class BaseComponent {
   constructor(
     parent,
     tag = "div",
