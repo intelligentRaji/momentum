@@ -5,6 +5,7 @@ export default function getBg() {
   let time = new Date();
   let timefase = ["night", "morning", "afternoon", "evening"];
   let quarter = Math.floor(time.getHours() / 6);
+  const settings = JSON.parse(localStorage.getItem("RajiSettings"));
 
   function getGitBg() {
     let number = String(Math.floor(1 + Math.random() * (20 - 1))).padStart(
@@ -23,6 +24,7 @@ export default function getBg() {
     setBg();
 
     function getSlideNext() {
+      const settings = JSON.parse(localStorage.getItem("RajiSettings"));
       if (number == 20) {
         number = "01";
       } else {
@@ -184,7 +186,12 @@ export default function getBg() {
     setFirstUnsplashBg();
   }
 
-  getGitBg();
-  //getUnsplashBg();
-  //getFlickrBg();
+  console.log(settings.PhotoSource);
+  if (settings.PhotoSource.gitHub.Mode === "on") {
+    getGitBg();
+  } else if (settings.PhotoSource.Unsplash.Mode === "on") {
+    getUnsplashBg();
+  } else if (settings.PhotoSource.Flickr.Mode === "on") {
+    getFlickrBg();
+  }
 }

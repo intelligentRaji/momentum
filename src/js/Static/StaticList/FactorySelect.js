@@ -1,5 +1,6 @@
 import { BaseComponent, createElem, ToUpperCase } from "../../utils.js";
 import TagButton from "./TagButton.js";
+import getBg from "../../bg.js";
 
 export default class SelectFactory extends BaseComponent {
   constructor(parent, tag, className, options, parentClass) {
@@ -21,13 +22,15 @@ export default class SelectFactory extends BaseComponent {
         "settings-item-wrapper tags",
         this.element
       );
-      this.tagButtons = options.sections.map((el) => {
+      this.tagButtons = options.sections.map((el, index) => {
         return new TagButton(
           this.tagsWrapper,
           "button",
           "settings-item-tag-button",
           el,
-          this
+          this,
+          options,
+          index
         );
       });
     } else {
@@ -67,6 +70,9 @@ export default class SelectFactory extends BaseComponent {
         }
       }
       localStorage.setItem("RajiSettings", JSON.stringify(settings));
+      if (options.type === "PhotoSource") {
+        getBg();
+      }
     });
   }
 

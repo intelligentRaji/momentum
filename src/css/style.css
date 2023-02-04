@@ -842,6 +842,7 @@ body {
    font-weight: 400;
    background-color: transparent;
    border: 1px solid transparent;
+   transition: all 0.2s ease 0s;
 }
 
 .settings-item-tag-button.active {
