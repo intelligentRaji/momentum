@@ -17,7 +17,7 @@ export default class NavigationButton {
     this.wrapper = wrapper;
     this.element.addEventListener("click", () => {
       this.activeButton();
-      wrapper.list.setList(this.wrapper);
+      wrapper.list.listItems = wrapper.list.setList(this.wrapper);
       if (parent.element.clientWidth <= 46) {
         parent.navigationSmallStyle();
       }

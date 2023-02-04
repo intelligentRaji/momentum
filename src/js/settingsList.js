@@ -1,11 +1,25 @@
 export default function setSettingsList() {
   const settings = {
     language: "ru",
-    PhotoSourse: [
-      { Source: "gitHub", Mode: "on" },
-      { Source: "Unsplash", Tags: ["Nature", "City"], Mode: "off" },
-      { Source: "Flickr", Tags: ["Nature", "City"], Mode: "off" },
-    ],
+    PhotoSource: {
+      gitHub: {
+        Mode: "on",
+      },
+      Unsplash: {
+        Tags: [
+          { name: "Nature", mode: "on" },
+          { name: "City", mode: "off" },
+        ],
+        Mode: "off",
+      },
+      Flickr: {
+        Tags: [
+          { name: "Nature", mode: "on" },
+          { name: "City", mode: "off" },
+        ],
+        Mode: "off",
+      },
+    },
     blocks: {
       time: "on",
       date: "on",
