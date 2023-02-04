@@ -1,23 +1,22 @@
 import { BaseComponent, createElem } from "../../utils.js";
 
 export default class TagButton extends BaseComponent {
-  static number = 0;
-  constructor(parent, tag, className, options, position) {
+  constructor(parent, tag, className, options, parentClass) {
+    console.log(parentClass);
     super(parent, tag, className);
-    console.log(position);
-    TagButton.number++;
-    this.element.type = "radio";
-    this.element.id = options.name + position;
-    this.element.name = position;
-    if ((options.mode = "on")) {
-      this.element.setAttribute("checked", true);
+    this.element.textContent = "#" + options.name;
+    if (options.mode === "on") {
+      this.element.classList.add("active");
     }
-    this.label = createElem(
-      "label",
-      "settings-item-label",
-      parent,
-      options.name
-    );
-    this.label.setAttribute("for", options.name + position);
+    this.element.addEventListener("click", () => {
+      if (options.mode === "off") {
+        parentClass.tagButtons.forEach((el) => {
+          if (el.element.classList.contains("active")) {
+            el.element.classList.remove("active");
+          }
+        });
+        this.element.classList.add("active");
+      }
+    });
   }
 }

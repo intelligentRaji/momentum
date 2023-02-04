@@ -22,12 +22,12 @@ export default class SelectFactory extends BaseComponent {
         this.element
       );
       this.tagButtons = options.sections.map((el) => {
-        el = new TagButton(
+        return new TagButton(
           this.tagsWrapper,
-          "input",
-          "settings-item-input",
+          "button",
+          "settings-item-tag-button",
           el,
-          options.text
+          this
         );
       });
     } else {

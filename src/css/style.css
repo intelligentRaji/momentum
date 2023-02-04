@@ -833,24 +833,19 @@ body {
    gap: 15px;
 }
 
-.settings-item-input {
-   position: absolute;
-   left: 0;
-   top: 0;
-   visibility: hidden;
-}
-
-.settings-item-input:checked ~ .settings-item-label {
-   opacity: 0.8;
-}
-
-.settings-item-label {
-   opacity: 0.5;
+.settings-item-tag-button {
+   opacity: 0.4;
    font-size: 16px;
    color: white;
    text-align: left;
    letter-spacing: 1px;
    font-weight: 400;
+   background-color: transparent;
+   border: 1px solid transparent;
+}
+
+.settings-item-tag-button.active {
+   opacity: 0.8;
 }
 
 .settings-item-text {
