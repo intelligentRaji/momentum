@@ -1,6 +1,6 @@
 import { BaseComponent, createElem, ToUpperCase } from "../../utils.js";
 import TagButton from "./TagButton.js";
-import getBg from "../../bg.js";
+import setBg from "../../setBg.js";
 
 export default class SelectFactory extends BaseComponent {
   constructor(parent, tag, className, options, parentClass) {
@@ -57,7 +57,7 @@ export default class SelectFactory extends BaseComponent {
         } else {
           this.setModeOff(this.switch, settings, options.type, options.text);
         }
-      } else {
+      } else if (options.type === "PhotoSource") {
         if (settings[options.type][options.text].Mode === "off") {
           this.setModeOn(
             this.switch,
@@ -67,12 +67,11 @@ export default class SelectFactory extends BaseComponent {
             parentClass,
             options.sections
           );
+          console.log(settings[options.type]);
+          setBg();
         }
       }
       localStorage.setItem("RajiSettings", JSON.stringify(settings));
-      if (options.type === "PhotoSource") {
-        getBg();
-      }
     });
   }
 

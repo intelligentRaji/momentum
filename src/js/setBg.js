@@ -1,12 +1,8 @@
-export default async function getBg() {
-  const next = document.querySelector(".slide-next");
-  const prev = document.querySelector(".slide-prev");
+export default async function setBg() {
   const body = document.querySelector("body");
   let time = new Date();
   let timefase = ["night", "morning", "afternoon", "evening"];
   let quarter = Math.floor(time.getHours() / 6);
-  let partOfTheDay;
-  let partOfTheDayCity;
   const settings = JSON.parse(localStorage.getItem("RajiSettings"));
   let data = await getFlickrUrl("nature");
   let cityData = await getFlickrUrl("city");
@@ -25,22 +21,6 @@ export default async function getBg() {
   let Unsplashnumber = Math.floor(Math.random() * arr.length);
   let UnsplashCityNumber = Math.floor(Math.random() * cityArr.length);
   let Flickrnumber = Math.floor(Math.random() * data.photos.photo.length);
-
-  async function setFlickrUrl(tag) {
-    time = new Date();
-    quarter = Math.floor(time.getHours() / 6);
-    if (tag === "nature") {
-      if (partOfTheDay !== quarter) {
-        partOfTheDay = quarter;
-        data = await getFlickrUrl(tag);
-      }
-    } else if (tag === "city") {
-      if (partOfTheDayCity !== quarter) {
-        partOfTheDayCity = quarter;
-        cityData = await getFlickrUrl(tag);
-      }
-    }
-  }
 
   async function getFlickrUrl(tag) {
     const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=${timefase[quarter]}${tag}&per_page=20&extras=url_l&format=json&nojsoncallback=1`;
@@ -71,90 +51,12 @@ export default async function getBg() {
           loadUnsplashBg(tag);
         }
       }
-      timeCheck(tag);
+      timeCheck();
       setLocalStorage(tag);
     } else if (settings.PhotoSource.Flickr.Mode === "on") {
-      setFlickrUrl(tag);
       loadFlickrBg(tag);
     }
   }
-
-  function getSlideNext() {
-    const settings = JSON.parse(localStorage.getItem("RajiSettings"));
-    const tag = getActiveTag(settings).toLowerCase();
-    if (settings.PhotoSource.gitHub.Mode === "on") {
-      if (number == 20) {
-        number = "01";
-      } else {
-        number = String(+number + 1).padStart(2, "0");
-      }
-    } else if (settings.PhotoSource.Unsplash.Mode === "on") {
-      if (tag === "nature") {
-        if (arr.length >= 20) {
-          if (Unsplashnumber === arr.length - 1) {
-            Unsplashnumber = 0;
-          } else {
-            Unsplashnumber += 1;
-          }
-        }
-      } else if (tag === "city") {
-        if (cityArr.length >= 20) {
-          if (UnsplashCityNumber === cityArr.length - 1) {
-            UnsplashCityNumber = 0;
-          } else {
-            UnsplashCityNumber += 1;
-          }
-        }
-      }
-    } else if (settings.PhotoSource.Flickr.Mode === "on") {
-      if (Flickrnumber === data.photos.photo.length - 1) {
-        Flickrnumber = 0;
-      } else {
-        Flickrnumber += 1;
-      }
-    }
-    setBg(settings);
-  }
-
-  function getPrevSlide() {
-    const settings = JSON.parse(localStorage.getItem("RajiSettings"));
-    const tag = getActiveTag(settings).toLowerCase();
-    if (settings.PhotoSource.gitHub.Mode === "on") {
-      if (number == 1) {
-        number = "20";
-      } else {
-        number = String(+number - 1).padStart(2, "0");
-      }
-    } else if (settings.PhotoSource.Unsplash.Mode === "on") {
-      if (tag === "nature") {
-        if (arr.length >= 20) {
-          if (Unsplashnumber === 0) {
-            Unsplashnumber = arr.length - 1;
-          } else {
-            Unsplashnumber -= 1;
-          }
-        }
-      } else if (tag === "city") {
-        if (cityArr.length >= 20) {
-          if (UnsplashCityNumber === 0) {
-            UnsplashCityNumber = cityArr.length - 1;
-          } else {
-            UnsplashCityNumber -= 1;
-          }
-        }
-      }
-    } else if (settings.PhotoSource.Flickr.Mode === "on") {
-      if (Flickrnumber === 0) {
-        Flickrnumber = data.photos.photo.length - 1;
-      } else {
-        Flickrnumber -= 1;
-      }
-    }
-    setBg(settings);
-  }
-
-  next.addEventListener("click", getSlideNext);
-  prev.addEventListener("click", getPrevSlide);
 
   setBg(settings);
 
@@ -176,22 +78,14 @@ export default async function getBg() {
     }
   }
 
-  function timeCheck(tag) {
+  function timeCheck() {
     const cacheTime = 2 * 60 * 60 * 1000;
     let curTime = new Date();
-    if (tag === "nature") {
-      for (let item of arr) {
-        if (+curTime - Date.parse(item[0]) > cacheTime) {
-          arr.shift();
-        } else {
-          break;
-        }
-      }
-    } else if (tag === "city") {
-      for (let item of cityArr) {
-        if (+curTime - Date.parse(item[0]) > cacheTime) {
-          cityArr.shift();
-        }
+    for (let item of arr) {
+      if (+curTime - Date.parse(item[0]) > cacheTime) {
+        arr.shift();
+      } else {
+        break;
       }
     }
   }

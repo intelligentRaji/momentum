@@ -63,7 +63,6 @@ export default async function getWeather() {
   weatherInput.addEventListener("change", async function () {
     weatherIcon.className = "weather-icon owf";
     localStorage.setItem("city", weatherInput.value);
-    console.log(weatherInput.value);
     data = await changeWeather();
     compareWeather();
   });

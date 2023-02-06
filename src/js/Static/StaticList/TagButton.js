@@ -1,5 +1,4 @@
 import { BaseComponent, createElem } from "../../utils.js";
-import getBg from "../../bg.js";
 
 export default class TagButton extends BaseComponent {
   constructor(
@@ -37,7 +36,6 @@ export default class TagButton extends BaseComponent {
           "on";
       }
       localStorage.setItem("RajiSettings", JSON.stringify(settings));
-      getBg();
     });
   }
 }
