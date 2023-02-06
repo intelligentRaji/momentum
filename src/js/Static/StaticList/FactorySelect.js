@@ -6,6 +6,7 @@ export default class SelectFactory extends BaseComponent {
   constructor(parent, tag, className, options, parentClass) {
     super(parent, tag, className);
     if (typeof options.sections === "object") {
+      this.element.style.flexDirection = "column";
       this.switchWrapper = createElem(
         "div",
         "settings-item-wrapper",
