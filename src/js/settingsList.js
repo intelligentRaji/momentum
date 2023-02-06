@@ -1,6 +1,10 @@
 export default function setSettingsList() {
   const settings = {
-    language: "ru",
+    language: {
+      russian: "off",
+      english: "on",
+      belarusian: "off",
+    },
     PhotoSource: {
       gitHub: {
         Mode: "on",

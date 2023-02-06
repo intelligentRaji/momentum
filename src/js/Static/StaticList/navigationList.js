@@ -62,6 +62,23 @@ export default class SettingsList extends BaseComponent {
         }
       }
       return photoSource;
+    } else if (wrapper.navigation.activeButton.name === "Language") {
+      const Languages = settings.language;
+      for (let key in Languages) {
+        Languages[key] = new SelectFactory(
+          this.element,
+          "li",
+          "settings-item",
+          {
+            type: "language",
+            text: key,
+            mode: Languages[key],
+            sections: "off",
+          },
+          this
+        );
+      }
+      return Languages;
     }
   }
 }

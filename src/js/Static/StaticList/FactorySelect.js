@@ -70,6 +70,17 @@ export default class SelectFactory extends BaseComponent {
           console.log(settings[options.type]);
           setBg();
         }
+      } else if (options.type === "language") {
+        if (settings[options.type][options.text] === "off") {
+          this.setModeOn(
+            this.switch,
+            settings,
+            options.type,
+            options.text,
+            parentClass,
+            options.sections
+          );
+        }
       }
       localStorage.setItem("RajiSettings", JSON.stringify(settings));
     });
@@ -96,6 +107,10 @@ export default class SelectFactory extends BaseComponent {
       if (typeof sections === "object") {
         this.element.style.height = "100px";
       }
+    } else if (type === "language") {
+      this.setAutomaticlyOff(settings, type, parentClass, sections);
+      settings[type][text] = "on";
+      el.classList.add("on");
     }
   }
 
@@ -114,14 +129,20 @@ export default class SelectFactory extends BaseComponent {
   setAutomaticlyOff(settings, type, parentClass, options, sections) {
     for (let key in parentClass.listItems) {
       if (parentClass.listItems[key].switch.classList.contains("on")) {
-        settings[type][parentClass.listItems[key].localStorageName].Mode =
-          "off";
+        if (type === "PhotoSource") {
+          settings[type][parentClass.listItems[key].localStorageName].Mode =
+            "off";
+        } else if (type === "language") {
+          settings[type][parentClass.listItems[key].localStorageName] = "off";
+        }
         parentClass.listItems[key].switch.classList.remove("on");
-        this.closeElement(
-          parentClass.listItems[key].element,
-          options,
-          sections
-        );
+        if (type === "PhotoSource") {
+          this.closeElement(
+            parentClass.listItems[key].element,
+            options,
+            sections
+          );
+        }
       }
     }
   }
