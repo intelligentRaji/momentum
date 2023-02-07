@@ -18,4 +18,4 @@ getWeather();
 loadQuote();
 player();
 Todo();
-new Settings("div", "settings", document.body);
+new Settings("div", "settings closed", document.body);

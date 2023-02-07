@@ -67,8 +67,8 @@ export function getListOnDayChange(input, parent, currentDate, yestardayDate) {
       "Today",
       element.text,
       parent,
-      element.status,
-      currentDate
+      element.status
+      //currentDate
     );
   });
   for (let element of yesterdayList) {
@@ -79,8 +79,8 @@ export function getListOnDayChange(input, parent, currentDate, yestardayDate) {
         "Today",
         element.text,
         parent,
-        element.status,
-        currentDate
+        element.status
+        //currentDate
       );
     }
   }
