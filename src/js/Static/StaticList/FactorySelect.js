@@ -1,6 +1,8 @@
 import { BaseComponent, createElem, ToUpperCase } from "../../utils.js";
 import TagButton from "./TagButton.js";
 import setBg from "../../setBg.js";
+import { showTime } from "../../time.js";
+import i18n from "i18next";
 
 export default class SelectFactory extends BaseComponent {
   constructor(parent, tag, className, options, parentClass) {
@@ -112,6 +114,7 @@ export default class SelectFactory extends BaseComponent {
       this.setAutomaticlyOff(settings, type, parentClass, sections);
       settings[type][text] = "on";
       el.classList.add("on");
+      i18n.changeLanguage(text);
     }
   }
 

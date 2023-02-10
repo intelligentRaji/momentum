@@ -45,6 +45,7 @@ const config = {
       patterns: [
         { from: "./src/json", to: "" },
         { from: "./src/assets/sounds", to: "sounds" },
+        { from: "./src/assets/locales", to: "locales" },
       ],
     }),
     // Add your plugins here
@@ -91,5 +92,8 @@ module.exports = () => {
   } else {
     config.mode = "development";
   }
+  config.experiments = {
+    topLevelAwait: true,
+  };
   return config;
 };

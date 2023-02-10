@@ -33,7 +33,6 @@ export function removeClass(el, className) {
 }
 
 export function trimDate(date) {
-  console.log(date);
   const name = `${date.getDate()} ${date.getMonth()} ${date.getFullYear()}`;
   return name;
 }

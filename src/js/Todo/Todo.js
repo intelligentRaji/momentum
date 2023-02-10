@@ -82,7 +82,6 @@ export default function Todo() {
   setInterval(() => {
     let currentDate = new Date();
     let yestardayDate = yesterdayDate(new Date());
-    console.log(yestardayDate);
     if (localStorage.getItem(trimDate(yestardayDate))) {
       getListOnDayChange(
         input,

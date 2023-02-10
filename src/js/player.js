@@ -246,11 +246,19 @@ export default async function player() {
 
   playArr.forEach((e) => {
     e.addEventListener("click", () => {
-      number = playArr.indexOf(e);
-      time.textContent = `${playList[number].duration}`;
-      createAudio();
-      playAudio();
-      numCheck();
+      console.log(audio.paused);
+      if (audio.paused && e.classList.contains("active")) {
+        console.log(1);
+        playAudio();
+      } else if (audio.paused || !e.classList.contains("active")) {
+        number = playArr.indexOf(e);
+        time.textContent = `${playList[number].duration}`;
+        createAudio();
+        playAudio();
+        numCheck();
+      } else {
+        pauseAudio();
+      }
     });
   });
 
