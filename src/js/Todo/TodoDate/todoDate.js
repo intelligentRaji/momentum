@@ -28,7 +28,7 @@ export default class PlansDate {
         this.futureDate
       );
     });
-    this.text = new DateText("p", "todo-plan-text lng", this.element);
+    this.text = new DateText("span", "todo-plan-text lng", this.element);
     this.setTextContentForFirstTime(this.futureDate);
     this.next = new Arrow("div", "todo-date-icon next", this.element);
     this.next.element.addEventListener("click", () => {
@@ -45,19 +45,18 @@ export default class PlansDate {
 
   setTextContentForFirstTime(date) {
     this.text.element.id = this.text.months[date.getMonth()];
+    this.text.date.textContent = date.getDate();
     i18n.on("loaded", () => {
-      this.text.element.textContent = i18n.t(this.text.element.id, {
-        data: String(date.getDate()),
-        year: String(date.getFullYear()),
-      });
+      this.text.element.textContent = i18n.t(this.text.element.id);
     });
+    this.text.year.textContent = date.getFullYear();
   }
 
   setTextContent(date) {
     this.text.element.id = this.text.months[date.getMonth()];
-    this.text.element.textContent = `${date.getDate()} ${i18n.t(
-      this.text.element.id
-    )} ${date.getFullYear()}`;
+    this.text.date.textContent = date.getDate();
+    this.text.element.textContent = i18n.t(this.text.element.id);
+    this.text.year.textContent = date.getFullYear();
   }
 
   plusDate(date) {

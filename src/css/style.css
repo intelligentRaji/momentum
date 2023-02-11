@@ -489,6 +489,7 @@ body {
 
 .todo-date {
    display: flex;
+   justify-content: space-between;
    align-items: center;
    border-radius: 10px;
    background-color: rgba(78, 78, 78, 0.3);
@@ -512,7 +513,14 @@ body {
    font-size: 14px;
    color: white;
    letter-spacing: 1px;
+   display: inline-block;
 }
+
+.plan-text-wrapper {
+   display: flex;
+   gap: 5px;
+}
+
 .next {
    opacity: 0.5;
    height: 30px;

@@ -4,7 +4,7 @@ import i18n from "i18next";
 export default class TodoButtonActive {
   constructor(parent) {
     this.element = createElem("button", "todo-active-button lng", parent);
-    this.element.id = "Todo";
+    this.element.id = "Todolist";
     i18n.on("loaded", () => {
       this.element.textContent = i18n.t(this.element.id);
     });

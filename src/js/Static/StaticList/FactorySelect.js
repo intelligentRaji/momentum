@@ -38,10 +38,17 @@ export default class SelectFactory extends BaseComponent {
         );
       });
     } else {
-      this.text = createElem("p", "settings-item-text", this.element);
+      this.text = createElem("p", "settings-item-text lng", this.element);
       this.switch = createElem("button", "settings-item-switch", this.element);
     }
-    this.text.textContent = this.getNameOfSection(options.text);
+    this.text.id = this.getNameOfSection(options.text);
+    if (i18n.isInitialized) {
+      this.text.textContent = i18n.t(this.text.id);
+    } else {
+      i18n.on("loaded", () => {
+        this.text.textContent = i18n.t(this.text.id);
+      });
+    }
     this.bg = createElem("div", "settings-item-switch-bg", this.switch);
     this.localStorageName = options.text;
     if (options.type === "blocks") {

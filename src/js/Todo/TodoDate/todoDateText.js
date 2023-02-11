@@ -17,6 +17,9 @@ export default class DateText {
   ];
 
   constructor(tag, className, parent) {
-    this.element = createElem(tag, className, parent);
+    this.textWrapper = createElem("div", "plan-text-wrapper", parent);
+    this.date = createElem("span", "todo-plan-text", this.textWrapper);
+    this.element = createElem(tag, className, this.textWrapper);
+    this.year = createElem("span", "todo-plan-text", this.textWrapper);
   }
 }
