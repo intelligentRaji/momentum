@@ -28,7 +28,7 @@ export default function Todo() {
   const deal = createDeals(todo);
   const plansStructure = createElem("div", "todo-plans-structure", todo);
   const Inbox = createElem("div", "todo-inbox spisok", todo);
-  const input = new CreateInput("input", "todo-input", todo);
+  const input = new CreateInput("input", "todo-input lng", todo);
   input.element.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === "NumpadEnter") {
       if (buttons.active === "Today") {

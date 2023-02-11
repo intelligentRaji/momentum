@@ -1,8 +1,13 @@
 import { createElem } from "../../utils.js";
+import i18n from "i18next";
 
 export default class TodoButtonActive {
   constructor(parent) {
-    this.element = createElem("button", "todo-active-button", parent, "Todo");
+    this.element = createElem("button", "todo-active-button lng", parent);
+    this.element.id = "Todo";
+    i18n.on("loaded", () => {
+      this.element.textContent = i18n.t(this.element.id);
+    });
   }
 
   activeMode(todo, buttons) {

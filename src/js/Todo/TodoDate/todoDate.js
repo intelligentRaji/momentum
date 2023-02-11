@@ -8,6 +8,7 @@ import {
 import Arrow from "./TodoArrow.js";
 import DateText from "./todoDateText.js";
 import { getListFromLocalSotrage } from "../localStorage.js";
+import i18n from "i18next";
 
 export default class PlansDate {
   futureDate = tommorowDate(new Date());
@@ -27,8 +28,8 @@ export default class PlansDate {
         this.futureDate
       );
     });
-    this.text = new DateText("p", "todo-plan-text", this.element);
-    this.setTextContent(this.futureDate);
+    this.text = new DateText("p", "todo-plan-text lng", this.element);
+    this.setTextContentForFirstTime(this.futureDate);
     this.next = new Arrow("div", "todo-date-icon next", this.element);
     this.next.element.addEventListener("click", () => {
       removeChilds(list);
@@ -42,10 +43,21 @@ export default class PlansDate {
     });
   }
 
+  setTextContentForFirstTime(date) {
+    this.text.element.id = this.text.months[date.getMonth()];
+    i18n.on("loaded", () => {
+      this.text.element.textContent = i18n.t(this.text.element.id, {
+        data: String(date.getDate()),
+        year: String(date.getFullYear()),
+      });
+    });
+  }
+
   setTextContent(date) {
-    this.text.element.textContent = `${date.getDate()} ${
-      this.text.months[date.getMonth()]
-    } ${date.getFullYear()}`;
+    this.text.element.id = this.text.months[date.getMonth()];
+    this.text.element.textContent = `${date.getDate()} ${i18n.t(
+      this.text.element.id
+    )} ${date.getFullYear()}`;
   }
 
   plusDate(date) {

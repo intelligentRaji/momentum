@@ -1,9 +1,14 @@
 import { BaseComponent, createElem } from "../../utils.js";
+import i18n from "i18next";
 
 export default class Buttons {
   constructor(tag, className, parent) {
     const buttons = ["Today", "Plans", "Inbox"].reduce((a, e) => {
-      a[e] = createElem("button", "todo-btn", parent, e);
+      a[e] = createElem("button", "todo-btn lng", parent);
+      a[e].id = e;
+      i18n.on("loaded", () => {
+        a[e].textContent = i18n.t(e);
+      });
       return a;
     }, {});
     buttons.Today.classList.add("active");
@@ -22,13 +27,16 @@ export default class Buttons {
   InputPlaceholder(input) {
     switch (this.active) {
       case "Today":
-        input.placeholder = "New Todo";
+        input.id = "newTodo";
+        input.placeholder = i18n.t(input.id);
         break;
       case "Plans":
-        input.placeholder = "New Plan";
+        input.id = "newPlan";
+        input.placeholder = i18n.t(input.id);
         break;
       case "Inbox":
-        input.placeholder = "New Idea";
+        input.id = "newIdea";
+        input.placeholder = i18n.t(input.id);
         break;
     }
   }

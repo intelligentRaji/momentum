@@ -1,7 +1,7 @@
 import { hideSetction } from "./utils.js";
 import i18n from "i18next";
 
-export default async function getWeather() {
+export default async function setWeather() {
   const weather = document.querySelector(".weather");
   const weatherIcon = document.querySelector(".weather-icon");
   const weatherCont = document.querySelector(".description-container");
@@ -67,11 +67,4 @@ export default async function getWeather() {
     changeWeather();
     compareWeather();
   }
-
-  weatherInput.addEventListener("change", async function () {
-    weatherIcon.className = "weather-icon owf";
-    localStorage.setItem("city", weatherInput.value);
-    data = await changeWeather();
-    compareWeather();
-  });
 }

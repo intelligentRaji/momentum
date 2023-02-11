@@ -1,4 +1,5 @@
 import { hideSetction } from "./utils.js";
+import i18n from "i18next";
 
 export default async function loadQuote() {
   const quote = document.querySelector(".quote");
@@ -12,13 +13,31 @@ export default async function loadQuote() {
     let res = await fetch(quotes);
     let data = await res.json();
 
-    let number = Math.floor(0 + Math.random() * data.length);
+    let number = Math.floor(Math.random() * data.length);
 
-    quote.textContent = data[number].text;
-    author.textContent = data[number].author;
+    quote.classList.add("lng");
+    author.classList.add("lng");
+    quote.id = `text${number}`;
+    author.id = `author${number}`;
+    i18n.on("loaded", () => {
+      quote.textContent = i18n.t(quote.id);
+      author.textContent = i18n.t(author.id);
+    });
+  }
+
+  async function changeQuotes() {
+    const quotes = "quotes.json";
+    let res = await fetch(quotes);
+    let data = await res.json();
+
+    let number = Math.floor(Math.random() * data.length);
+    quote.id = `text${number}`;
+    author.id = `author${number}`;
+    quote.textContent = i18n.t(quote.id);
+    author.textContent = i18n.t(author.id);
   }
 
   downloadQuotes();
 
-  changeQuote.addEventListener("click", downloadQuotes);
+  changeQuote.addEventListener("click", changeQuotes);
 }
