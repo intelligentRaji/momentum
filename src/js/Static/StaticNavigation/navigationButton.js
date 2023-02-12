@@ -1,4 +1,5 @@
 import { BaseComponent, createElem } from "../../utils.js";
+import i18n from "i18next";
 
 export default class NavigationButton {
   constructor(parent, tag, className, src, text, wrapper) {
@@ -12,8 +13,16 @@ export default class NavigationButton {
       undefined,
       src
     );
-    this.text = createElem("p", "settings-navigation-text", this.element);
-    this.text.textContent = text;
+    this.text = createElem("p", "settings-navigation-text lng", this.element);
+    //this.text.textContent = text;
+    this.text.id = text;
+    if (i18n.isInitialized) {
+      this.text.textContent = i18n.t(this.text.id);
+    } else {
+      i18n.on("loaded", () => {
+        this.text.textContent = i18n.t(this.text.id);
+      });
+    }
     this.wrapper = wrapper;
     this.element.addEventListener("click", () => {
       this.activeButton();
@@ -29,7 +38,7 @@ export default class NavigationButton {
   }
 
   activeButton() {
-    const text = this.text.textContent;
+    const text = this.text.id;
     const element = this.element;
     this.parent.activeButton.element.classList.remove("active");
     this.parent.activeButton = { name: text, element: element };

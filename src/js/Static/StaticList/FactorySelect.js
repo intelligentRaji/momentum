@@ -6,7 +6,14 @@ import i18n from "i18next";
 import setWeather from "../../setWeather.js";
 
 export default class SelectFactory extends BaseComponent {
-  constructor(parent, tag, className, options, parentClass) {
+  constructor(
+    parent,
+    tag,
+    className,
+    options,
+    parentClass,
+    wrapper = undefined
+  ) {
     super(parent, tag, className);
     if (typeof options.sections === "object") {
       this.element.style.flexDirection = "column";
@@ -78,9 +85,8 @@ export default class SelectFactory extends BaseComponent {
             parentClass,
             options.sections
           );
-          console.log(settings[options.type]);
-          setBg();
         }
+        setBg();
       } else if (options.type === "language") {
         if (settings[options.type][options.text] === "off") {
           this.setModeOn(
@@ -89,7 +95,8 @@ export default class SelectFactory extends BaseComponent {
             options.type,
             options.text,
             parentClass,
-            options.sections
+            options.sections,
+            wrapper
           );
         }
       }
@@ -103,7 +110,8 @@ export default class SelectFactory extends BaseComponent {
     type,
     text,
     parentClass = undefined,
-    sections = undefined
+    sections = undefined,
+    wrapper = undefined
   ) {
     if (type === "blocks") {
       settings[type][text] = "on";
@@ -131,6 +139,7 @@ export default class SelectFactory extends BaseComponent {
             element.textContent = i18n.t(element.id);
           }
         }
+        wrapper.navigation.width = wrapper.navigation.element.scrollWidth;
       });
       setWeather();
     }

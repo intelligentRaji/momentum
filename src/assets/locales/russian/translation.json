@@ -73,5 +73,11 @@
   "Quotes": "Цитаты",
   "Weather": "Погода",
   "Player": "Плеер",
-  "Todo": "Список дел"
+  "Todo": "Список дел",
+  "Display": "Дисплей",
+  "Language": "Язык",
+  "Wallpaper": "Изображение",
+  "Settings": "Настройки",
+  "WeatherLoadError": "ERROR: погода не загрузилась",
+  "WeatherCityError": "ERROR: по запросу {{city}} не найдено погоды!"
 }

@@ -73,5 +73,11 @@
   "Quotes": "Quotes",
   "Weather": "Weather",
   "Player": "Player",
-  "Todo": "Todo"
+  "Todo": "Todo",
+  "Display": "Display",
+  "Language": "Language",
+  "Wallpaper": "Wallpaper",
+  "Settings": "Settings",
+  "WeatherLoadError": "ERROR: weather didn't load",
+  "WeatherCityError": "ERROR: city not found for {{city}}!"
 }

@@ -7,7 +7,7 @@ export default class Settings {
     this.element = createElem(tag, className, parent);
     this.activeButton = new activeButton(
       "button",
-      "settings-active-button",
+      "settings-active-button lng",
       this.element
     );
     this.wrapper = new Wrapper("div", "settings-wrapper", this.element);

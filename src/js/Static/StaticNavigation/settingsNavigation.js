@@ -3,6 +3,7 @@ import NavigationButton from "./navigationButton.js";
 import showurl from "../../../assets/svg/show.svg";
 import languageurl from "../../../assets/svg/language.svg";
 import wallpaperurl from "../../../assets/svg/wallpaper.svg";
+import i18n from "i18next";
 
 export default class Navigation extends BaseComponent {
   constructor(parent, tag, className, wrapper) {
@@ -25,7 +26,13 @@ export default class Navigation extends BaseComponent {
       name: this.buttonsNames[0],
       element: this.buttons.Display.element,
     };
-    this.width = this.buttons.Display.element.clientWidth;
+    if (i18n.isInitialized) {
+      this.width = this.element.scrollWidth;
+    } else {
+      i18n.on("loaded", () => {
+        this.width = this.element.scrollWidth;
+      });
+    }
     this.element.style.width = this.buttons.Display.img.clientWidth + 15 + "px";
     this.element.addEventListener("mouseenter", () => {
       this.timeoutId = setTimeout(() => {

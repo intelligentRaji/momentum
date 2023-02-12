@@ -27,19 +27,43 @@ export default async function getWeather() {
 
   function compareWeather() {
     try {
+      weatherError.textContent = "";
       weatherIcon.classList.add(`owf-${data.weather[0].id}`);
       weatherCont.firstElementChild.textContent = `${Math.round(
         data.main.temp
       )}°C`;
       weatherCont.lastElementChild.textContent = `${data.weather[0].description}`;
-      wind.textContent = `${i18n.t("wind")} ${Math.round(
-        data.wind.speed
-      )} ${i18n.t("ms")}`;
-      humidity.textContent = `${i18n.t("humidity")} ${data.main.humidity}%`;
-      weatherError.textContent = "";
+      if (i18n.isInitialized) {
+        wind.textContent = `${i18n.t("wind")} ${Math.round(
+          data.wind.speed
+        )} ${i18n.t("ms")}`;
+      } else {
+        i18n.on("loaded", () => {
+          wind.textContent = `${i18n.t("wind")} ${Math.round(
+            data.wind.speed
+          )} ${i18n.t("ms")}`;
+        });
+      }
+      if (i18n.isInitialized) {
+        humidity.textContent = `${i18n.t("humidity")} ${data.main.humidity}%`;
+      } else {
+        i18n.on("loaded", () => {
+          humidity.textContent = `${i18n.t("humidity")} ${data.main.humidity}%`;
+        });
+      }
     } catch (err) {
       weatherClear();
-      weatherError.textContent = `ERROR: city not found for ${weatherInput.value}!`;
+      if (i18n.isInitialized) {
+        weatherError.textContent = i18n.t("WeatherCityError", {
+          city: weatherInput.value,
+        });
+      } else {
+        i18n.on("loaded", () => {
+          weatherError.textContent = i18n.t("WeatherCityError", {
+            city: weatherInput.value,
+          });
+        });
+      }
     }
   }
 
@@ -59,12 +83,17 @@ export default async function getWeather() {
       return data;
     } catch (err) {
       weatherClear();
-      weatherError.textContent = "ERROR: weather didn't load";
+      if (i18n.isInitialized) {
+        weatherError.textContent = i18n.t("WeatherLoadError");
+      } else {
+        i18n.on("loaded", () => {
+          weatherError.textContent = i18n.t("WeatherLoadError");
+        });
+      }
     }
   }
 
   function loadingWeather() {
-    changeWeather();
     compareWeather();
   }
 

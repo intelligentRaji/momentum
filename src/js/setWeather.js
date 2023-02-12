@@ -9,7 +9,6 @@ export default async function setWeather() {
   const humidity = document.querySelector(".humidity");
   const weatherInput = document.querySelector(".city");
   const weatherError = document.querySelector(".weather-error");
-  hideSetction(weather);
   if (localStorage.getItem("city") !== null) {
     weatherInput.value = localStorage.getItem("city");
   } else {
@@ -39,7 +38,17 @@ export default async function setWeather() {
       weatherError.textContent = "";
     } catch (err) {
       weatherClear();
-      weatherError.textContent = `ERROR: city not found for ${weatherInput.value}!`;
+      if (i18n.isInitialized) {
+        weatherError.textContent = i18n.t("WeatherCityError", {
+          city: weatherInput.value,
+        });
+      } else {
+        i18n.on("loaded", () => {
+          weatherError.textContent = i18n.t("WeatherCityError", {
+            city: weatherInput.value,
+          });
+        });
+      }
     }
   }
 
@@ -59,12 +68,17 @@ export default async function setWeather() {
       return data;
     } catch (err) {
       weatherClear();
-      weatherError.textContent = "ERROR: weather didn't load";
+      if (i18n.isInitialized) {
+        weatherError.textContent = i18n.t("WeatherLoadError");
+      } else {
+        i18n.on("loaded", () => {
+          weatherError.textContent = i18n.t("WeatherLoadError");
+        });
+      }
     }
   }
 
   function loadingWeather() {
-    changeWeather();
     compareWeather();
   }
 }

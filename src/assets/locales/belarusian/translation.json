@@ -73,5 +73,11 @@
   "Quotes": "Цытаты",
   "Weather": "Надвор'е",
   "Player": "Плэер",
-  "Todo": "Спіс спраў"
+  "Todo": "Спіс спраў",
+  "Display": "Дысплей",
+  "Language": "Мова",
+  "Wallpaper": "Малюнак",
+  "Settings": "Налады",
+  "WeatherLoadError": "ERROR: надвор'е не загрузілася",
+  "WeatherCityError": "ERROR: па запыце {{city}} не знойдзена надвор'я!"
 }

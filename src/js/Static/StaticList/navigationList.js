@@ -75,7 +75,8 @@ export default class SettingsList extends BaseComponent {
             mode: Languages[key],
             sections: "off",
           },
-          this
+          this,
+          wrapper
         );
       }
       return Languages;

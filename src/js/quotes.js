@@ -19,11 +19,6 @@ export default async function loadQuote() {
     author.classList.add("lng");
     quote.id = `text${number}`;
     author.id = `author${number}`;
-    console.log(quote.id);
-    /*i18n.on("loaded", () => {
-      quote.textContent = i18n.t(quote.id);
-      author.textContent = i18n.t(author.id);
-    });*/
     if (i18n.isInitialized) {
       quote.textContent = i18n.t(quote.id);
       author.textContent = i18n.t(author.id);
