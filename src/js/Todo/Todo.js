@@ -16,6 +16,7 @@ import {
   getListOnDayChange,
 } from "./localStorage.js";
 import PlansDate from "./TodoDate/todoDate.js";
+import SmallActiveButton from "./TodoButtons/SmallActiveButton.js";
 
 export default function Todo() {
   const todo = createElem("div", "todo unactive", document.body);
@@ -46,6 +47,10 @@ export default function Todo() {
       }
     }
   });
+  const SmallScreenActiveButton = new SmallActiveButton(
+    todo,
+    "todo-small-active-button lng"
+  );
   const buttons = new Buttons("button", "todo-btn", buttonsWrapper);
   for (let key in buttons.buttons) {
     buttons.buttons[key].addEventListener("click", () => {

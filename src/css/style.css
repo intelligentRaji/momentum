@@ -40,6 +40,7 @@ body {
   flex-direction: column;
   min-width: 195px;
   transition: all 0.3s ease 0s;
+  z-index: 1;
 }
 
 .player-controls {
@@ -299,6 +300,18 @@ body {
 
 .todo.unactive {
    transform: translateY(210px);
+}
+
+.todo-small-active-button {
+   display: none;
+   position: absolute;
+   right: 10px;
+   bottom: 10px;
+   font-size: 16px;
+   letter-spacing: 2px;
+   color: rgba(255, 255, 255, 0.5);
+   transition: all 0.2s ease 0s;
+   cursor: pointer;
 }
 
 .todo-btns {
@@ -603,6 +616,7 @@ body {
   height: 40vh;
   min-height: 260px;
   padding: 20px;
+  z-index: 0;
 }
 
 .slider-icon {
@@ -924,6 +938,20 @@ body {
    }
    .settings {
       background-color: rgba(0, 0, 0, 0.9);
+   }
+}
+
+@media (max-width: 1120px) {
+   .todo.unactive {
+      transform: translateY(100%);
+   }
+
+   .todo-small-active-button {
+      display: block;
+   }
+   
+   .settings.closed {
+      transform: translateY(100%);
    }
 }
 
