@@ -9,6 +9,12 @@ import PlayerSmallButton from "./playerButton.js";
 export default async function player() {
   const header = document.querySelector(".header");
   const player = document.querySelector(".player-container");
+  const playerSmallButton = new PlayerSmallButton(
+    header,
+    "button",
+    "player player-small-button lng",
+    player
+  );
   const audio = new Audio();
   const playList = await getPlaylist();
   const play = document.querySelector(".play");
@@ -26,12 +32,6 @@ export default async function player() {
   const volume = document.createElement("img");
   const volumeBar = document.createElement("input");
   const change = document.createElement("img");
-  const playerSmallButton = new PlayerSmallButton(
-    header,
-    "button",
-    "player player-small-button lng",
-    player
-  );
   document.addEventListener("click", (e) => {
     const click = e.composedPath().includes(player);
     const buttonClick = e.composedPath().includes(playerSmallButton.element);

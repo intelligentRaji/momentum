@@ -30,6 +30,7 @@ export default async function setBg() {
   }
 
   function setBg(settings) {
+    console.log(settings.PhotoSource.Unsplash.Mode === "on");
     const tag = getActiveTag(settings).toLowerCase();
     if (settings.PhotoSource.gitHub.Mode === "on") {
       const img = new Image();

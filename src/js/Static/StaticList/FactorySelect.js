@@ -85,7 +85,7 @@ export default class SelectFactory extends BaseComponent {
             options.sections
           );
         }
-        setBg();
+        setTimeout(setBg, 100);
       } else if (options.type === "language") {
         if (settings[options.type][options.text] === "off") {
           this.setModeOn(
