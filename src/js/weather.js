@@ -1,20 +1,40 @@
 import { hideSetction } from "./utils.js";
 import i18n from "i18next";
+import { weatherButton } from "./weatherButton.js";
 
 export default async function getWeather() {
-  const weather = document.querySelector(".weather");
+  const header = document.querySelector(".header");
+  const weather = document.querySelector(".weather-container");
   const weatherIcon = document.querySelector(".weather-icon");
   const weatherCont = document.querySelector(".description-container");
   const wind = document.querySelector(".wind");
   const humidity = document.querySelector(".humidity");
   const weatherInput = document.querySelector(".city");
   const weatherError = document.querySelector(".weather-error");
+  const weatherSmallButton = new weatherButton(
+    header,
+    "button",
+    "weather weather-small-button",
+    weather
+  );
+  weather.classList.add("closed");
+  document.addEventListener("click", (e) => {
+    const click = e.composedPath().includes(weather);
+    const buttonClick = e.composedPath().includes(weatherSmallButton.element);
+    if (!click) {
+      if (!buttonClick) {
+        weather.classList.add("closed");
+      }
+    }
+  });
   hideSetction(weather);
   if (localStorage.getItem("city") !== null) {
     weatherInput.value = localStorage.getItem("city");
   } else {
     weatherInput.value = "Minsk";
   }
+
+  weatherSmallButton.city.textContent = weatherInput.value;
 
   let data = await changeWeather();
 
@@ -29,6 +49,10 @@ export default async function getWeather() {
     try {
       weatherError.textContent = "";
       weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+      weatherSmallButton.image.className = `weather-small-image owf owf-${data.weather[0].id}`;
+      weatherSmallButton.temperature.textContent = `${Math.round(
+        data.main.temp
+      )}°`;
       weatherCont.firstElementChild.textContent = `${Math.round(
         data.main.temp
       )}°C`;
@@ -98,6 +122,7 @@ export default async function getWeather() {
   }
 
   weatherInput.addEventListener("change", async function () {
+    weatherSmallButton.city.textContent = weatherInput.value;
     weatherIcon.className = "weather-icon owf";
     localStorage.setItem("city", weatherInput.value);
     data = await changeWeather();

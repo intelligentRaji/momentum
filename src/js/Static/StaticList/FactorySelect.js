@@ -1,7 +1,6 @@
 import { BaseComponent, createElem, ToUpperCase } from "../../utils.js";
 import TagButton from "./TagButton.js";
 import setBg from "../../setBg.js";
-import { showTime } from "../../time.js";
 import i18n from "i18next";
 import setWeather from "../../setWeather.js";
 
@@ -59,7 +58,8 @@ export default class SelectFactory extends BaseComponent {
     this.bg = createElem("div", "settings-item-switch-bg", this.switch);
     this.localStorageName = options.text;
     if (options.type === "blocks") {
-      this.item = document.querySelector(`.${options.text}`);
+      console.log(options.text);
+      this.item = document.querySelectorAll(`.${options.text}`);
     }
     if (options.mode === "on") {
       this.switch.classList.add("on");
@@ -116,9 +116,11 @@ export default class SelectFactory extends BaseComponent {
     if (type === "blocks") {
       settings[type][text] = "on";
       el.classList.add("on");
-      this.item.style.transition = "all 0.3s ease 0s";
-      this.item.style.visibility = "visible";
-      this.item.classList.remove("invisible");
+      for (let element of this.item) {
+        element.style.transition = "all 0.3s ease 0s";
+        element.style.visibility = "visible";
+        element.classList.remove("invisible");
+      }
     } else if (type === "PhotoSource") {
       this.setAutomaticlyOff(settings, type, parentClass, sections);
       settings[type][text].Mode = "on";
@@ -149,11 +151,14 @@ export default class SelectFactory extends BaseComponent {
     settings[type][text] = "off";
     el.classList.remove("on");
     if (type === "blocks") {
-      this.item.style.transition = "all 0.3s ease 0s";
-      this.item.classList.add("invisible");
-      setTimeout(() => {
-        this.item.style.visibility = "hidden";
-      }, 300);
+      for (let element of this.item) {
+        console.log(this.item);
+        element.style.transition = "all 0.3s ease 0s";
+        element.classList.add("invisible");
+        setTimeout(() => {
+          element.style.visibility = "hidden";
+        }, 300);
+      }
     }
   }
 

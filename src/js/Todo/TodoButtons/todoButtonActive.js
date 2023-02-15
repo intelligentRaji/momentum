@@ -11,7 +11,6 @@ export default class TodoButtonActive {
   }
 
   activeMode(todo, buttons) {
-    todo.classList.contains("unactive");
     todo.classList.remove("unactive");
     for (let key in buttons) {
       buttons[key].style.display = "inline-block";

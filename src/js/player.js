@@ -4,9 +4,11 @@ import urlOrder from "../assets/svg/order.svg";
 import urlRepeat from "../assets/svg/repeat.svg";
 import urlRandom from "../assets/svg/random.svg";
 import { hideSetction } from "./utils.js";
+import PlayerSmallButton from "./playerButton.js";
 
 export default async function player() {
-  const player = document.querySelector(".player");
+  const header = document.querySelector(".header");
+  const player = document.querySelector(".player-container");
   const audio = new Audio();
   const playList = await getPlaylist();
   const play = document.querySelector(".play");
@@ -24,9 +26,25 @@ export default async function player() {
   const volume = document.createElement("img");
   const volumeBar = document.createElement("input");
   const change = document.createElement("img");
+  const playerSmallButton = new PlayerSmallButton(
+    header,
+    "button",
+    "player player-small-button lng",
+    player
+  );
+  document.addEventListener("click", (e) => {
+    const click = e.composedPath().includes(player);
+    const buttonClick = e.composedPath().includes(playerSmallButton.element);
+    if (!click) {
+      if (!buttonClick) {
+        player.classList.add("closed");
+      }
+    }
+  });
   const urls = [urlOrder, urlRepeat, urlRandom];
   let tracksMemory = null;
   let firstTime = true;
+  player.classList.add("closed");
   hideSetction(player);
 
   settings.classList.add("play-settings");

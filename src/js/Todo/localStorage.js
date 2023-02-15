@@ -60,28 +60,18 @@ export function getListOnDayChange(input, parent, currentDate, yestardayDate) {
   removeChilds(parent);
   const yesterdayList = JSON.parse(localStorage.getItem(yestardayDate));
   localStorage.removeItem(yestardayDate);
-  const todayList = JSON.parse(localStorage.getItem(currentDate));
-  localStorage.removeItem(currentDate);
-  todayList.forEach((element) => {
-    input.InputCreateDeal(
-      "Today",
-      element.text,
-      parent,
-      element.status
-      //currentDate
-    );
-  });
+  if (localStorage.getItem(currentDate)) {
+    const todayList = JSON.parse(localStorage.getItem(currentDate));
+    localStorage.removeItem(currentDate);
+    todayList.forEach((element) => {
+      input.InputCreateDeal("Today", element.text, parent, element.status);
+    });
+  }
   for (let element of yesterdayList) {
     if (element.status === "completed") {
       continue;
     } else {
-      input.InputCreateDeal(
-        "Today",
-        element.text,
-        parent,
-        element.status
-        //currentDate
-      );
+      input.InputCreateDeal("Today", element.text, parent, element.status);
     }
   }
 }
