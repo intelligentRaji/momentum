@@ -34,7 +34,11 @@ export default async function getWeather() {
     weatherInput.value = "Minsk";
   }
 
-  weatherSmallButton.city.textContent = weatherInput.value;
+  if (weatherError.textContent !== "") {
+    weatherSmallButton.city.textContent = i18n.t("Weather");
+  } else {
+    weatherSmallButton.city.textContent = weatherInput.value;
+  }
 
   let data = await changeWeather();
 
