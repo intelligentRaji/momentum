@@ -45,8 +45,10 @@ export default class Navigation extends BaseComponent {
   }
 
   navigationFullStyle() {
-    this.element.style.width = this.width + 10 + "px";
-    this.element.classList.add("active");
+    if (window.innerWidth > 500) {
+      this.element.style.width = this.width + 10 + "px";
+      this.element.classList.add("active");
+    }
   }
 
   navigationSmallStyle() {

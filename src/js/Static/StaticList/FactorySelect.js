@@ -58,7 +58,6 @@ export default class SelectFactory extends BaseComponent {
     this.bg = createElem("div", "settings-item-switch-bg", this.switch);
     this.localStorageName = options.text;
     if (options.type === "blocks") {
-      console.log(options.text);
       this.item = document.querySelectorAll(`.${options.text}`);
     }
     if (options.mode === "on") {

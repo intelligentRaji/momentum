@@ -14,7 +14,6 @@
 body {
   overflow: hidden;
   position: relative;
-  min-width: 480px;
   min-height: 100vh;
   font-family: "Arial", sans-serif;
   font-size: 16px;
@@ -1115,16 +1114,96 @@ body {
   }
 
   .greeting-container {
+   flex-wrap: nowrap;
+   flex-direction: column;
     min-height: 40px;
     font-size: 32px;
   }
 
   .greeting {
     padding: 5px;
+    text-align: center;
   }
 
   .name {
     font-size: 32px;
     padding: 5px;
+    text-align: center;
   }
+
+  .date {
+   margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+   .time {
+      font-size: 55px;
+   }
+
+   .date {
+      font-size: 20px;
+   }
+
+   .greeting {
+      font-size: 20px;
+   }
+
+   .name {
+      font-size: 20px;
+   }
+
+   .settings {
+      max-width: 100%;
+      width: 500px;
+      border-top-left-radius: 10px;
+   }
+
+   .quote {
+      margin-bottom: 10px;
+   }
+}
+
+@media (max-width: 420px) {
+   .todo {
+      max-width: 100%;
+      width: 420px;
+      border-top-right-radius: 10px;
+      z-index: 2;
+   }
+
+   .time {
+      font-size: 50px;
+      margin-bottom: 0;
+   }
+
+   .date {
+      font-size: 16px;
+      margin-bottom: 0;
+   }
+
+   .greeting {
+      font-size: 16px;
+   }
+
+   .name {
+      font-size: 16px;
+   }
+
+   .weather-container {
+      max-width: 100%;
+      width: 420px;
+      z-index: 2;
+      border-bottom-right-radius: 10px;
+   }
+
+   .city {
+      width: 100%;
+      text-align: center;
+   }
+
+   .player-container {
+      width: 100%;
+      border-bottom-left-radius: 10px;
+   }
 }
