@@ -5,6 +5,7 @@ import urlRepeat from "../assets/svg/repeat.svg";
 import urlRandom from "../assets/svg/random.svg";
 import { hideSetction } from "./utils.js";
 import PlayerSmallButton from "./playerButton.js";
+import classTrack from "./playerTrack.js";
 
 export default async function player() {
   const header = document.querySelector(".header");
@@ -94,11 +95,8 @@ export default async function player() {
   buttons.append(change);
 
   for (let i = 0; i < playList.length; i++) {
-    const li = document.createElement("li");
-    li.classList.add("play-item");
-    li.textContent = playList[i].title;
+    const li = new classTrack(playUl, "li", "play-item", playList[i].title);
     playArr.push(li);
-    playUl.append(li);
   }
 
   let number = 0;
@@ -151,9 +149,9 @@ export default async function player() {
   function numCheck() {
     playArr.forEach((e) => {
       if (playArr.indexOf(e) === number) {
-        e.classList.add("active");
+        e.element.classList.add("active");
       } else {
-        e.classList.remove("active");
+        e.element.classList.remove("active");
       }
     });
   }
@@ -163,11 +161,13 @@ export default async function player() {
     audio.play();
     trackname.textContent = `${playList[number].title}`;
     firstTime = false;
+    setButtonStatus();
   }
 
   function pauseAudio() {
     play.classList.remove("pause");
     audio.pause();
+    setButtonStatus();
   }
 
   function audioNext() {
@@ -195,6 +195,15 @@ export default async function player() {
       );
       curtime.textContent = `${minutes}:${seconds}`;
     });
+  }
+
+  function setButtonStatus() {
+    playArr.forEach((element) => element.button.classList.remove("active"));
+    if (play.classList.contains("pause")) {
+      playArr[number].button.classList.add("active");
+    } else {
+      playArr[number].button.classList.remove("active");
+    }
   }
 
   timeCalc();
@@ -263,12 +272,10 @@ export default async function player() {
   });
 
   playArr.forEach((e) => {
-    e.addEventListener("click", () => {
-      console.log(audio.paused);
-      if (audio.paused && e.classList.contains("active")) {
-        console.log(1);
+    e.element.addEventListener("click", () => {
+      if (audio.paused && e.element.classList.contains("active")) {
         playAudio();
-      } else if (audio.paused || !e.classList.contains("active")) {
+      } else if (audio.paused || !e.element.classList.contains("active")) {
         number = playArr.indexOf(e);
         time.textContent = `${playList[number].duration}`;
         createAudio();

@@ -75,8 +75,10 @@ body {
 
 .play-item {
   position: relative;
+  display: flex;
+  gap: 10px;
   padding: 5px;
-  padding-left: 25px;
+  padding-left: 2px;
   list-style: none;
   opacity: 0.8;
   cursor: pointer;
@@ -88,18 +90,33 @@ body {
   opacity: 1;
 }
 
-.play-item::before {
+/* .play-item::before {
   content: "\2713";
   position: absolute;
   left: 5px;
   top: 2px;
   font-weight: 900;
-}
+} */
 
 .play-item.active {
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.2);
   border-radius: 5px;
+}
+
+.play-item-button {
+   border: none;
+   background: url('../assets/svg/small-play.svg') center center no-repeat;
+   background-size: cover;
+   width: 15px;
+   height: 15px;
+   margin-left: 5px;
+   transition: all 0.2s ease 0s;
+}
+
+.play-item-button.active {
+   background: url('../assets/svg/pause-small.svg') center center no-repeat;
+   background-size: cover;
 }
 
 .item-active::before {
