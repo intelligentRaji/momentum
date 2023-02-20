@@ -32,6 +32,7 @@ export default function setSettingsList() {
       weather: "on",
       player: "on",
       todo: "on",
+      links: "on",
     },
   };
 

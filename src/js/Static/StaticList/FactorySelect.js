@@ -141,8 +141,8 @@ export default class SelectFactory extends BaseComponent {
           }
         }
         wrapper.navigation.width = wrapper.navigation.element.scrollWidth;
+        setWeather();
       });
-      setWeather();
     }
   }
 
