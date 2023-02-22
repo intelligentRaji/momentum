@@ -5,11 +5,7 @@ export default async function getBg() {
   let time = new Date();
   let timefase = ["night", "morning", "afternoon", "evening"];
   let quarter = Math.floor(time.getHours() / 6);
-  let partOfTheDay;
-  let partOfTheDayCity;
   const settings = JSON.parse(localStorage.getItem("RajiSettings"));
-  let data = await getFlickrUrl("nature");
-  let cityData = await getFlickrUrl("city");
   let arr = [];
   if (localStorage.getItem("unsplashArr")) {
     arr = JSON.parse(localStorage.unsplashArr);
@@ -24,32 +20,34 @@ export default async function getBg() {
   );
   let Unsplashnumber = Math.floor(Math.random() * arr.length);
   let UnsplashCityNumber = Math.floor(Math.random() * cityArr.length);
-  let Flickrnumber = Math.floor(Math.random() * data.photos.photo.length);
+  let Flickrnumber = Math.floor(1 * Math.random() * (25 - 1));
+  let title;
 
-  async function setFlickrUrl(tag) {
-    time = new Date();
-    quarter = Math.floor(time.getHours() / 6);
-    if (tag === "nature") {
-      if (partOfTheDay !== quarter) {
-        partOfTheDay = quarter;
-        data = await getFlickrUrl(tag);
+  async function getFlickrBg(tag, func) {
+    try {
+      const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=${timefase[quarter]},${tag}&per_page=1&page=${Flickrnumber}&extras=url_h&format=json&nojsoncallback=1&safe_search=1&tag_mode=all`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (!data || data.photos.photo[0].title === title) {
+        if (func === "next") {
+          Flickrnumber += 1;
+        } else {
+          Flickrnumber -= 1;
+        }
+        getFlickrBg(tag);
       }
-    } else if (tag === "city") {
-      if (partOfTheDayCity !== quarter) {
-        partOfTheDayCity = quarter;
-        cityData = await getFlickrUrl(tag);
-      }
+      title = data.photos.photo[0].title;
+      const fakeImg = new Image();
+      fakeImg.src = data.photos.photo[0].url_h;
+      fakeImg.onload = () => {
+        body.style.backgroundImage = `url(${data.photos.photo[0].url_h})`;
+      };
+    } catch (err) {
+      console.log(Flickrnumber);
     }
   }
 
-  async function getFlickrUrl(tag) {
-    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=${timefase[quarter]}${tag}&per_page=20&extras=url_l&format=json&nojsoncallback=1`;
-    const res = await fetch(url);
-    const data = await res.json();
-    return data;
-  }
-
-  function setBg(settings) {
+  function setBg(settings, func) {
     const tag = getActiveTag(settings).toLowerCase();
     if (settings.PhotoSource.gitHub.Mode === "on") {
       const img = new Image();
@@ -74,8 +72,7 @@ export default async function getBg() {
       timeCheck(tag);
       setLocalStorage(tag);
     } else if (settings.PhotoSource.Flickr.Mode === "on") {
-      setFlickrUrl(tag);
-      loadFlickrBg(tag);
+      getFlickrBg(tag, func);
     }
   }
 
@@ -107,13 +104,13 @@ export default async function getBg() {
         }
       }
     } else if (settings.PhotoSource.Flickr.Mode === "on") {
-      if (Flickrnumber === data.photos.photo.length - 1) {
-        Flickrnumber = 0;
+      if (Flickrnumber === 25) {
+        Flickrnumber = 1;
       } else {
         Flickrnumber += 1;
       }
     }
-    setBg(settings);
+    setBg(settings, "next");
   }
 
   function getPrevSlide() {
@@ -144,19 +141,19 @@ export default async function getBg() {
         }
       }
     } else if (settings.PhotoSource.Flickr.Mode === "on") {
-      if (Flickrnumber === 0) {
-        Flickrnumber = data.photos.photo.length - 1;
+      if (Flickrnumber === 1) {
+        Flickrnumber = 25;
       } else {
         Flickrnumber -= 1;
       }
     }
-    setBg(settings);
+    setBg(settings, "prev");
   }
 
   next.addEventListener("click", getSlideNext);
   prev.addEventListener("click", getPrevSlide);
 
-  setBg(settings);
+  setBg(settings, "next");
 
   async function getUnsplashUrl(tag) {
     const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${timefase[quarter]}-${tag}&client_id=PwfEKpizTrZ0GTTpCtQdGqIG0r19M5rO8VP8zqt_YcQ`;
@@ -207,21 +204,6 @@ export default async function getBg() {
       fakeImg.src = cityArr[UnsplashCityNumber][1];
       fakeImg.onload = () => {
         body.style.backgroundImage = `url(${cityArr[UnsplashCityNumber][1]})`;
-      };
-    }
-  }
-
-  function loadFlickrBg(tag) {
-    const fakeImg = new Image();
-    if (tag === "nature") {
-      fakeImg.src = data.photos.photo[Flickrnumber].url_l;
-      fakeImg.onload = () => {
-        body.style.backgroundImage = `url(${data.photos.photo[Flickrnumber].url_l})`;
-      };
-    } else if (tag === "city") {
-      fakeImg.src = cityData.photos.photo[Flickrnumber].url_l;
-      fakeImg.onload = () => {
-        body.style.backgroundImage = `url(${cityData.photos.photo[Flickrnumber].url_l})`;
       };
     }
   }

@@ -4,8 +4,6 @@ export default async function setBg() {
   let timefase = ["night", "morning", "afternoon", "evening"];
   let quarter = Math.floor(time.getHours() / 6);
   const settings = JSON.parse(localStorage.getItem("RajiSettings"));
-  let data = await getFlickrUrl("nature");
-  let cityData = await getFlickrUrl("city");
   let arr = [];
   if (localStorage.getItem("unsplashArr")) {
     arr = JSON.parse(localStorage.unsplashArr);
@@ -20,17 +18,10 @@ export default async function setBg() {
   );
   let Unsplashnumber = Math.floor(Math.random() * arr.length);
   let UnsplashCityNumber = Math.floor(Math.random() * cityArr.length);
-  let Flickrnumber = Math.floor(Math.random() * data.photos.photo.length);
+  let Flickrnumber = Math.floor(1 * Math.random() * (25 - 1));
+  let title;
 
-  async function getFlickrUrl(tag) {
-    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=${timefase[quarter]}${tag}&per_page=20&extras=url_l&format=json&nojsoncallback=1`;
-    const res = await fetch(url);
-    const data = await res.json();
-    return data;
-  }
-
-  function setBg(settings) {
-    console.log(settings.PhotoSource.Unsplash.Mode === "on");
+  function setBg(settings, func) {
     const tag = getActiveTag(settings).toLowerCase();
     if (settings.PhotoSource.gitHub.Mode === "on") {
       const img = new Image();
@@ -52,20 +43,21 @@ export default async function setBg() {
           loadUnsplashBg(tag);
         }
       }
-      timeCheck();
+      timeCheck(tag);
       setLocalStorage(tag);
     } else if (settings.PhotoSource.Flickr.Mode === "on") {
-      loadFlickrBg(tag);
+      getFlickrBg(tag, func);
     }
   }
 
   setBg(settings);
 
   async function getUnsplashUrl(tag) {
-    const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${timefase[quarter]}-${tag}&client_id=PwfEKpizTrZ0GTTpCtQdGqIG0r19M5rO8VP8zqt_YcQ`;
+    const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${timefase[quarter]},${tag}&client_id=PwfEKpizTrZ0GTTpCtQdGqIG0r19M5rO8VP8zqt_YcQ`;
     const res = await fetch(url);
     const data = await res.json();
-    const img = data.urls.regular;
+    console.log(data);
+    const img = data.urls.full;
     const time = new Date();
     const fakeImg = new Image();
     fakeImg.src = img;
@@ -106,21 +98,6 @@ export default async function setBg() {
     }
   }
 
-  function loadFlickrBg(tag) {
-    const fakeImg = new Image();
-    if (tag === "nature") {
-      fakeImg.src = data.photos.photo[Flickrnumber].url_l;
-      fakeImg.onload = () => {
-        body.style.backgroundImage = `url(${data.photos.photo[Flickrnumber].url_l})`;
-      };
-    } else if (tag === "city") {
-      fakeImg.src = cityData.photos.photo[Flickrnumber].url_l;
-      fakeImg.onload = () => {
-        body.style.backgroundImage = `url(${cityData.photos.photo[Flickrnumber].url_l})`;
-      };
-    }
-  }
-
   function setLocalStorage(tag) {
     if (tag === "nature") {
       localStorage.unsplashArr = JSON.stringify(arr);
@@ -145,6 +122,30 @@ export default async function setBg() {
           return item.name;
         }
       }
+    }
+  }
+
+  async function getFlickrBg(tag, func) {
+    try {
+      const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=${timefase[quarter]},${tag}&per_page=1&page=${Flickrnumber}&extras=url_h&format=json&nojsoncallback=1&safe_search=1&tag_mode=all`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (!data || data.photos.photo[0].title === title) {
+        if (func === "next") {
+          Flickrnumber += 1;
+        } else {
+          Flickrnumber -= 1;
+        }
+        getFlickrBg(tag);
+      }
+      title = data.photos.photo[0].title;
+      const fakeImg = new Image();
+      fakeImg.src = data.photos.photo[0].url_h;
+      fakeImg.onload = () => {
+        body.style.backgroundImage = `url(${data.photos.photo[0].url_h})`;
+      };
+    } catch (err) {
+      console.log(Flickrnumber);
     }
   }
 }
