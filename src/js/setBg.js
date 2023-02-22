@@ -18,10 +18,9 @@ export default async function setBg() {
   );
   let Unsplashnumber = Math.floor(Math.random() * arr.length);
   let UnsplashCityNumber = Math.floor(Math.random() * cityArr.length);
-  let Flickrnumber = Math.floor(1 * Math.random() * (25 - 1));
   let title;
 
-  function setBg(settings, func) {
+  function setBg(settings) {
     const tag = getActiveTag(settings).toLowerCase();
     if (settings.PhotoSource.gitHub.Mode === "on") {
       const img = new Image();
@@ -46,7 +45,7 @@ export default async function setBg() {
       timeCheck(tag);
       setLocalStorage(tag);
     } else if (settings.PhotoSource.Flickr.Mode === "on") {
-      getFlickrBg(tag, func);
+      getFlickrBg(tag);
     }
   }
 
@@ -125,27 +124,25 @@ export default async function setBg() {
     }
   }
 
-  async function getFlickrBg(tag, func) {
-    try {
-      const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=${timefase[quarter]},${tag}&per_page=1&page=${Flickrnumber}&extras=url_h&format=json&nojsoncallback=1&safe_search=1&tag_mode=all`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (!data || data.photos.photo[0].title === title) {
-        if (func === "next") {
-          Flickrnumber += 1;
-        } else {
-          Flickrnumber -= 1;
-        }
-        getFlickrBg(tag);
-      }
-      title = data.photos.photo[0].title;
-      const fakeImg = new Image();
-      fakeImg.src = data.photos.photo[0].url_h;
-      fakeImg.onload = () => {
-        body.style.backgroundImage = `url(${data.photos.photo[0].url_h})`;
-      };
-    } catch (err) {
-      console.log(Flickrnumber);
+  async function getFlickrBg(tag) {
+    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0f15ff623f1198a1f7f52550f8c36057&tags=${
+      timefase[quarter]
+    },${tag}&per_page=1&page=${getRandomNumber()}&extras=url_l&format=json&nojsoncallback=1&safe_search=1&tag_mode=all`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data || data.photos.photo[0].title === title) {
+      getFlickrBg(tag);
     }
+    title = data.photos.photo[0].title;
+    const fakeImg = new Image();
+    fakeImg.src = data.photos.photo[0].url_l;
+    fakeImg.onload = () => {
+      body.style.backgroundImage = `url(${data.photos.photo[0].url_l})`;
+    };
+  }
+
+  function getRandomNumber() {
+    const num = Math.floor(1 + Math.random() * (1000 - 1));
+    return num;
   }
 }
